@@ -11,7 +11,7 @@ export default {
     },
 
     created(){
-        this.$root.$store.dispatch("fetchRoles");
+        //this.$root.$store.dispatch("fetchRoles");
     },
 
     computed: {

@@ -16,12 +16,7 @@ export default {
 
 	methods: {
 		joinInitialLetters() {
-			if (!this.name || !this.lastName) {
-				this.name = '';
-				this.lastName = '';
-			}
-
-			return this.name[0] + this.lastName[0] || '+';
+			return !this.name[0] || !this.lastName[0] ? '+' : this.name[0] + this.lastName[0];
 		},
 
 		onFileChange(event) {

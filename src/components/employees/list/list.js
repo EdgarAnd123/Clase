@@ -23,7 +23,7 @@ export default {
 
   beforeRouteEnter(to, from, next) {
     next((vue) => {
-      vue.$root.$store.dispatch("fetchEmployees");
+      //vue.$root.$store.dispatch("fetchEmployees");
       vue.$root.$store.dispatch("initializeHeader", { title: 'Empleados' });
     })
   },
@@ -47,6 +47,10 @@ export default {
         })
         .sort((a, b) => (a.name > b.name) ? 1 : -1);
     }
+  },
+
+  mounted() {
+    this.employeesCounter = this.employees.length;
   },
 
   watch: {

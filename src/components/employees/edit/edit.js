@@ -8,9 +8,7 @@ export default {
         'loader-component': loaderComponent
     },
     data() {
-        return {
-
-        }
+        return {}
     },
     computed: {
         employee() {
@@ -39,6 +37,7 @@ export default {
     methods: {
         save () {
             this.$root.$store.dispatch("edit", this.employee)
+            .then( () => this.$router.push('/employees') )
         }
     }
 };

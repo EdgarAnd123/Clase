@@ -11,7 +11,7 @@
         </b-form-group>
 
         <b-form-group id="telephone" label="Teléfono" label-for="telephone-input">
-            <b-form-input v-model="employee.phoneNumber" id="telephone-input" type="tel" @keydown="phoneNumberFormatter('telephone-input')" placeholder="Ingrese el teléfono de su nuevo empleado" min="10" required> </b-form-input>
+            <b-form-input v-model="employee.phoneNumber" id="telephone-input" type="tel" placeholder="Ingrese el teléfono de su nuevo empleado" min="10" required> </b-form-input>
         </b-form-group>
 
         <b-form-group id="emergencyNumber" label="Teléfono de emergencia" label-for="emergencyNumber-input">
