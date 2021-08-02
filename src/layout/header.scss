@@ -1,0 +1,46 @@
+.header {
+    display: grid;
+    grid-template-columns: 15% 70% 15%;
+    grid-template-rows: 3.75rem;
+    background-color: #A358BA;
+    place-items: center;
+    padding: 0 1rem;
+
+    .header__btn-side-menu {
+        grid-area: 1 / 1 / 1 / 2;
+        place-self: center start;
+        font-size: 1.25rem;
+        color: #FFFFFF;
+        border: none;
+        padding: 0;
+
+        &:active {
+            outline-style: none;
+        }
+
+        &:focus {
+            outline-style: none;
+        }
+    }
+
+    .header__title {
+        grid-area: 1 / 2 / 1 / 3;
+        color: #FFFFFF;
+        font-weight: 600;
+    }
+
+    .header__navbar {
+        .navbar__title {
+            font-weight: 700;
+            padding: 0 1rem;
+        }
+
+        .navbar__text {
+            padding: 0 1rem;
+        }
+
+        ul {
+            padding-left: 0 !important;
+        }
+    }
+}

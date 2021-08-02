@@ -1,0 +1,48 @@
+.image {
+    display: flex;
+    justify-content: center;
+
+    .image__outline {
+        padding: 4px;
+        border: 2px solid var(--borderColor);
+        border-radius: 50%;
+        position: relative;
+    }
+
+    .image-circle {
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+    .image-names {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #C4C4C4;
+        color:#FFF;
+        font-size: 1.875rem;
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+    }
+
+    .image__background-icon {
+        position: absolute;
+        bottom: 0rem;
+        right: .5rem;
+        background-color: rgba(255, 255, 255, 0.75);
+        border-radius: 50%;
+        padding: .2rem .4rem;
+
+        .image-icon {
+            font-size: 1rem;
+        }
+
+        label {
+            padding-left: 0;
+        }
+        input {
+            display: none;
+        }
+    }
+}
