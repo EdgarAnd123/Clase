@@ -1,0 +1,40 @@
+.profile {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 1.5rem 0;
+    padding: 1.5rem 1rem;
+
+    .profile__information {
+        display: grid;
+        place-content: center;
+        grid-gap: 1rem 0;
+
+        .profile__contact {
+            text-align: left;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            grid-gap: .5rem 1rem;
+
+            span {
+                display: block;
+            }
+        }
+    }
+
+    .profile__economics {
+        border-top: 2px solid #DFDFDF;
+        padding-top: 1.5rem;
+    }
+
+
+    .text-small { 
+        font-size: .87rem;
+    }
+
+    .separator {
+        border-bottom: 1.5px solid rgba(181,181,181,50%);
+        margin: .5rem 0;
+        padding: .5rem 0;
+    }
+}

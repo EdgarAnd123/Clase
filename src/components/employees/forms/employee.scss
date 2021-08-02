@@ -1,0 +1,48 @@
+.form {
+    padding: 1.5rem 0 .5rem;
+    
+    .form-group {
+        padding: 0 1rem;
+    }
+    
+    .formGroup__workingHours__input {
+        padding-top: 1rem;
+    }
+
+    .formGroup__workingHours__text {
+        display: flex;
+        justify-content: center;
+    }
+
+    .formGroup__salary {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        
+        .salary__dolar_symbol {
+            position: absolute; 
+            margin-left: .5rem; 
+            margin-top: .45rem;
+        }
+    
+        .salary__input {
+            padding-left: 1.5rem;
+        }
+    }
+
+    .btn-block {
+        border-radius: 0;
+        position: fixed;
+        bottom: 0;
+        z-index: 1;
+    }
+}
+
+/* Custom range bar color */
+input[type=range]::-webkit-slider-runnable-track {
+    background: #585858;
+}
+
+/* Custom range pointer color */
+input[type=range]::-webkit-slider-thumb {
+    background: #6DECA2;
+}

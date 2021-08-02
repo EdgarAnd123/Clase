@@ -1,0 +1,26 @@
+.card {
+    display: grid;
+    grid-template-columns: var(--firstColumnWidth) var(--secondColumnWidth) var(--thirdColumnWidth);
+    align-items: center;
+    border: none;
+    padding: 1.5rem 0;
+    gap: 0 1rem;
+    
+    .card__title {
+        font-size: 1rem;
+        font-weight: 700;
+    }
+
+    .card__text {
+        font-size: .87rem;
+        margin-bottom: 8px !important;
+    }
+
+    .card__icon {
+        color: #4b4b4b;
+    }
+    
+    .card__text-emergency {
+        color: #D30000;
+    }
+}

@@ -1,0 +1,36 @@
+.list__filters {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr min-content;
+    background-color: #A358BA;
+    place-content: stretch;
+    box-shadow: 0 10px 10px 0 rgba(218, 218, 218);
+    margin-bottom: 1rem;
+    padding: 0 1rem;
+
+    .filters__btn {
+        display: grid;
+        grid-template-columns: 1fr max-content;
+        font-size: .875rem;
+        padding: .5rem 0;
+
+        .filters__text {
+            font-size: .875rem;
+            color: #FFFFFF;
+        }
+    }
+}
+
+.list__employees {
+    max-width: 500px;
+    padding: 0 1rem;
+
+    .card-container {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+}
+
+.text-bold {
+    font-weight: 600;
+}
