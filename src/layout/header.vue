@@ -6,7 +6,7 @@
 
         <h3 class="header__title"> {{ title }} </h3>
 
-        <b-sidebar id="side-menu" class="header__navbar" title="Menú de navegación" backdrop shadow>
+        <b-sidebar id="side-menu" class="header__navbar" title="MENÚ" backdrop shadow>
             <p class="navbar__title"> Bienvenido: </p>
             <p class="navbar__text"> {{ user.email }} </p>
             <b-nav vertical class="px-3 py-2">

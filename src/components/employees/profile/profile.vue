@@ -14,10 +14,10 @@
             
             <div class="profile__contact">
                 <p> <span class="font-weight-bold"> Teléfono </span> 
-                    {{ employee.phoneNumber | phoneFormat }} 
+                    {{ employee.phoneNumber}} 
                 </p>
                 <p> <span class="font-weight-bold"> Emergencia </span>  
-                    {{ employee.emergencyNumber | phoneFormat }}
+                    {{ employee.emergencyNumber}}
                 </p>
                 <p> <span class="font-weight-bold"> Fecha inicio </span>  
                     {{employee.startDate }} 
