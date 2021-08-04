@@ -1,7 +1,9 @@
 <template>
 	<main>
 		<header-component v-if="!$route.meta.hideLayoutComponents"></header-component>
-		<router-view ></router-view>
+		<transition name="route" mode="out-in">
+			<router-view ></router-view>
+		</transition>
 		<alert-component></alert-component>
 		<footer-component v-if="!$route.meta.hideLayoutComponents"></footer-component>
 	</main>
