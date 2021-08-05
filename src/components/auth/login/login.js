@@ -10,8 +10,7 @@ export default {
 
 	methods: {
 		login() {
-			firebase.auth()
-			.signInWithEmailAndPassword(this.username, this.password)
+			firebase.auth().signInWithEmailAndPassword(this.username, this.password)
 			.then(
 				() => this.$router.push('employees'),
 				error => {

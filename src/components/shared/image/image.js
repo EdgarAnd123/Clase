@@ -49,7 +49,7 @@ export default {
 			}
 		},
 
-		imageSource() {
+		image() {
 			return this.imageUrl || this.imageSrc;
 		}
 	},

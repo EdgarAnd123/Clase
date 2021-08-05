@@ -46,7 +46,7 @@ export default {
           return true;
         })
         .sort((a, b) => (a.name > b.name) ? 1 : -1);
-    }
+    },
   },
 
   mounted() {
@@ -64,7 +64,15 @@ export default {
       if (!value) {
         return 'Present';
       }
+
       return value;
+    },
+    formatActiveStatusText: function(value) {
+      if (value) {
+        return 'Activo';
+      }
+
+      return 'Inactivo';
     }
   }
 }

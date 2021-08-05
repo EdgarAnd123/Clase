@@ -4,15 +4,11 @@ export default {
             width: String,
             default: '33.3'
         },
-        secondColumnWidth: {
-            width: String
-        },
-        thirdColumnWidth: {
-            width: String
-        },
+        secondColumnWidth: String,
+        thirdColumnWidth: String
     },
     computed: {
-        gridColumns () {
+        gridColumns() {
             return {
                 '--firstColumnWidth': `${this.firstColumnWidth}%`,
                 '--secondColumnWidth': this.secondColumnWidth ? `${this.secondColumnWidth}%` : `${(100 - this.firstColumnWidth) / 2}%`,

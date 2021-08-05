@@ -1,11 +1,19 @@
 import { mapGetters } from "vuex";
 import firebase from "firebase";
+import imageComponent from "../components/shared/image/image.vue"
 
 export default {
+  name: 'header-component',
+  components: {
+    'card-image': imageComponent
+  },
+
   data() {
     return {
-      menuItems: [ {
+      menuItems: [ 
+        {
           title: "Empleados",
+          icon: "phone-alt",
           children: [
             {
               title: "Lista",
@@ -16,7 +24,8 @@ export default {
               routeName: "create-employee",
             }
           ]
-        }]
+        }
+      ],
     }
   },
 
@@ -32,9 +41,9 @@ export default {
     signOut() {
       this.$root.$store.dispatch("setLogout");
 
-      firebase.auth()
-      .signOut()
-      .then( () => this.$router.go('/') );
+      firebase.auth().signOut().then( 
+        () => this.$router.go('/')
+      );
     }
   }
 }
