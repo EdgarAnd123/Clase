@@ -23,7 +23,7 @@ export default {
 
   beforeRouteEnter(to, from, next) {
     next((vue) => {
-      //vue.$root.$store.dispatch("fetchEmployees");
+      vue.$root.$store.dispatch("fetchEmployees");
       vue.$root.$store.dispatch("initializeHeader", { title: 'Empleados' });
     })
   },
@@ -37,7 +37,9 @@ export default {
     employees() {
       const employeesList = this.$root.$store.getters.getEmployees;
 
-      return employeesList
+      if(employeesList) {
+        
+        return employeesList
         .filter(employee => this.selectedFilter.indexOf(!employee.activeEmployee))
         .filter(employee => {
           if (this.searchValue) {
@@ -46,11 +48,8 @@ export default {
           return true;
         })
         .sort((a, b) => (a.name > b.name) ? 1 : -1);
-    },
-  },
-
-  mounted() {
-    this.employeesCounter = this.employees.length;
+      }
+    }      
   },
 
   watch: {

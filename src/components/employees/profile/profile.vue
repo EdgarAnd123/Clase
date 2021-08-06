@@ -20,7 +20,7 @@
                     {{ employee.emergencyNumber}}
                 </p>
                 <p> <span class="font-weight-bold"> Fecha inicio </span>  
-                    {{employee.startDate }} 
+                    {{employee.startDate | dateFormat }} 
                 </p>
                 <p> <span class="font-weight-bold"> Jornada </span> 
                     {{ employee.workingHours }} horas

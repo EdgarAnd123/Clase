@@ -1,5 +1,6 @@
 import imageComponent from "../../shared/image/image.vue"
 import loaderComponent from "../../loader/loader.vue"
+import moment from 'moment'
 
 export default {
     name: 'profileEmployee',
@@ -121,11 +122,15 @@ export default {
 
             return `$${value} pesos`;
         },
-
         phoneFormat: function(value) {
             if (!value) return '';
             
             return "(" + value.substring(0,3) + ") " + value.substring(3,6) + "-" + value.substring(6);
+        },
+        dateFormat: function(value){
+            const date = value.toDate();
+
+            return moment(date).format('L');
         }
     }
 }

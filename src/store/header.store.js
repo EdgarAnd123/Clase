@@ -1,6 +1,6 @@
 export default {
     state: {
-        title: 'Header',
+        title: '',
     },
 
     getters: {
