@@ -28,6 +28,10 @@
         display: grid;
         grid-template-columns: 1fr;
     }
+
+    .floating_container {
+        position: sticky;
+    }
 }
 
 .text-bold {

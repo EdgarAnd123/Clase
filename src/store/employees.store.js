@@ -95,10 +95,21 @@ export default  {
             });*/
         },
 
-        fetchEmployee( {commit, getters}, payload) {
-            const employee = getters.getEmployees.find(employee => employee.id === payload);
+        fetchEmployee( { commit, dispatch }, payload) {
+            dispatch('setLoading', true);
+            firebase.firestore().collection("empleados").doc(payload).get().then(doc => {
+                console.log(doc.data());
+                commit('SET_EMPLOYEE', doc.data());
+                dispatch('setLoading', false);
+                dispatch('setAlert', { msg: 'Consulta de usuarios realizada con éxito', type: 'success' } );
+            }).catch( error => {
+                console.log(error);
+                dispatch('setLoading', false);
+                dispatch('setAlert', { msg: 'Error al traer los usuarios de la base de datos', type: 'danger' } );
+            });
+            //const employee = getters.getEmployees.find(employee => employee.id === payload);
             
-            commit('SET_EMPLOYEE', employee);
+            //commit('SET_EMPLOYEE', employee);
             
             /*dispatch('setLoading', true);
             employeesApi.getEmployee(payload)

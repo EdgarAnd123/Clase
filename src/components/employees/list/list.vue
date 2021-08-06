@@ -13,28 +13,28 @@
         <div class="list__employees">
             <loader-component :loading="isLoading"></loader-component>
             <template>
-                    <transition-group name="list" tag="div" class="card-container">
-                        <template v-for="(employee,index) in employees">
-                            <router-link :key="index" :to="{name: 'profile-employee', params: { id: employee.id} }">
-                                <card :key="index" firstColumnWidth="25" secondColumnWidth="75" :class="{'card-inactive': !employee.activeEmployee}">
-                                        <template v-slot:firstColumn>
-                                            <card-image :imageSize="80" :name="employee.name[0]" :lastName="employee.lastName[0]" :imageUrl="employee.profileImage" :editable='false' :isActive="employee.activeEmployee"></card-image>
-                                        </template>
-                                        <template v-slot:secondColumn>
-                                            <p class="card__title"> {{employee.name}} {{employee.lastName}} </p>
-                                            <p class="card__text"> {{employee.role}} | <span class="font-weight-bold"> {{ employee.activeEmployee | formatActiveStatusText }} </span> </p>
-                                            <p class="card__text"> 
-                                                <font-awesome-icon class="card__icon" icon="phone-alt"/> {{employee.phoneNumber}} 
-                                            </p>
-                                            <!--<p class="card__text"> 
-                                                <font-awesome-icon class="card__icon" icon="phone-alt"/> <span class="card__text-emergency"> {{employee.emergencyNumber | phoneFormat}} </span>
-                                            </p>-->
-                                        </template>
-                                </card>
-                                <hr>
-                            </router-link>
-                        </template>
-                    </transition-group>
+                <transition-group name="list" tag="div" class="card-container">
+                    <template v-for="(employee,index) in employees">
+                        <router-link :key="index" :to="{name: 'profile-employee', params: { id: employee.id} }">
+                            <card :key="index" firstColumnWidth="25" secondColumnWidth="75" :class="{'card-inactive': !employee.activeEmployee}">
+                                <template v-slot:firstColumn>
+                                    <card-image :imageSize="80" :name="employee.name[0]" :lastName="employee.lastName[0]" :imageUrl="employee.profileImage" :editable='false' :isActive="employee.activeEmployee"></card-image>
+                                </template>
+                                <template v-slot:secondColumn>
+                                    <p class="card__title"> {{employee.name}} {{employee.lastName}} </p>
+                                    <p class="card__text"> {{employee.role}} | <span class="font-weight-bold"> {{ employee.activeEmployee | formatActiveStatusText }} </span> </p>
+                                    <p class="card__text"> 
+                                        <font-awesome-icon class="card__icon" icon="phone-alt"/> {{employee.phoneNumber}} 
+                                    </p>
+                                    <!--<p class="card__text"> 
+                                        <font-awesome-icon class="card__icon" icon="phone-alt"/> <span class="card__text-emergency"> {{employee.emergencyNumber | phoneFormat}} </span>
+                                    </p>-->
+                                </template>
+                            </card>
+                            <hr>
+                        </router-link>
+                    </template>
+                </transition-group>
                 <router-link class="btn btn-floating" tag="button" :to="{name: 'create-employee'}"> <font-awesome-icon icon="plus"/> </router-link>
             </template>
         </div>

@@ -17,7 +17,7 @@ export default {
     },
     beforeRouteEnter(to, from, next) {
         next( (vue) => { 
-            vue.$root.$store.dispatch("fetchEmployee", vue.$route.params.id);
+            vue.$root.$store.dispatch("fetchEmployee", vue.$route.params.id.toString());
             vue.$root.$store.dispatch("initializeHeader", {title: 'Detalles del empleado'} );
         } )
     },
@@ -128,9 +128,13 @@ export default {
             return "(" + value.substring(0,3) + ") " + value.substring(3,6) + "-" + value.substring(6);
         },
         dateFormat: function(value){
-            const date = value.toDate();
+            if(value) {
+                const date = value.toDate();
+                
+                return moment(date).format('L');
+            }
 
-            return moment(date).format('L');
+            return '';
         }
     }
 }

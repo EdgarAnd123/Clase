@@ -4,7 +4,7 @@
 
 .route-enter {
     opacity: 0;
-    transform: translateX(100px);
+    //transform: translateX(100px);
 }
 
 .route-leave-active {
@@ -13,7 +13,7 @@
 
 .route-leave-to {
     opacity: 0;
-    transform: translateX(-100px);
+    //transform: translateX(-100px);
 }
 
 .list-enter-active, .list-leave-active {
