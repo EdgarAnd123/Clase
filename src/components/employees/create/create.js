@@ -24,10 +24,7 @@ export default {
     methods: {
         save() {
             this.$root.$store.dispatch("add", this.employee)
-        },
-
-        close(){
-            this.$bvModal.hide('create-employee');
+            .then( () => this.$router.push('/employees') )
         }
     }
 };

@@ -9,7 +9,7 @@ export default [
         name: 'login', path: "/", component: login, meta: { hideLayoutComponents: true }
     },
     {
-        name: 'employees', path: "/employees", component: employees, meta: { requiresAuth: true }
+        name: 'employees', path: "/employees", component: employees ,meta: { requiresAuth: true }
     },
     {
         name: 'create-employee', path: "/employees/create", component: createEmployee, meta: { requiresAuth: true }

@@ -37,7 +37,9 @@ export default {
     employees() {
       const employeesList = this.$root.$store.getters.getEmployees;
 
-      return employeesList
+      if(employeesList) {
+        
+        return employeesList
         .filter(employee => this.selectedFilter.indexOf(!employee.activeEmployee))
         .filter(employee => {
           if (this.searchValue) {
@@ -46,7 +48,8 @@ export default {
           return true;
         })
         .sort((a, b) => (a.name > b.name) ? 1 : -1);
-    }
+      }
+    }      
   },
 
   watch: {
@@ -60,7 +63,15 @@ export default {
       if (!value) {
         return 'Present';
       }
+
       return value;
+    },
+    formatActiveStatusText: function(value) {
+      if (value) {
+        return 'Activo';
+      }
+
+      return 'Inactivo';
     }
   }
 }

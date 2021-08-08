@@ -1,9 +1,11 @@
-import employeesApi from "@/api/employees.api.js"
-import rolesApi from "@/api/roles.api.js"
+//import employeesApi from "@/api/employees.api.js"
+//import rolesApi from "@/api/roles.api.js"
+import firebase from 'firebase';
+//import moment from 'moment';
 
 export default  {
     state: {
-        employees_map: [],
+        employees: null,
         employee_map: {},
         working_hours: [8, 4],
         employees_filter: [
@@ -23,7 +25,11 @@ export default  {
                 disabled: false
             }
         ],
-        roles: [],
+        roles: [
+            "Cocinero",
+            "Repartidor", 
+            "Cajero"
+        ],
         salary_filter: [
             "Diario",
             "Semanal",
@@ -33,7 +39,7 @@ export default  {
     },
     getters: {
         getEmployees: state => {
-            return state.employees_map;
+            return state.employees;
         },
 
         getEmployee: state => {
@@ -64,9 +70,22 @@ export default  {
     actions: {
         fetchEmployees( { commit, dispatch } ) {
             dispatch('setLoading', true);
-            employeesApi.getEmployees()
+            firebase.firestore().collection("empleados").get().then(response => {
+                const docs = response.docs.map( doc => doc.data() );
+
+                commit('SET_EMPLOYEES', docs);
+                dispatch('setLoading', false);
+                dispatch('setAlert', { msg: 'Consulta de usuarios realizada con éxito', type: 'success' } );
+            }).catch( error => {
+                console.log(error);
+                dispatch('setLoading', false);
+                dispatch('setAlert', { msg: 'Error al traer los usuarios de la base de datos', type: 'danger' } );
+            });
+
+            /*employeesApi.getEmployees()
             .then(response => { 
                 dispatch('setLoading', false);
+                console.log(response.data);
                 commit('SET_EMPLOYEES', response.data);
                 dispatch('setAlert', { msg: 'Consulta de usuarios realizada con éxito', type: 'success' } );
             })
@@ -74,11 +93,26 @@ export default  {
                 console.log(error);
                 dispatch('setLoading', false);
                 dispatch('setAlert', { msg: 'Error al traer los usuarios de la base de datos', type: 'danger' } );
-            });
+            });*/
         },
 
-        fetchEmployee({ commit, dispatch }, payload) {
+        fetchEmployee( { commit, dispatch }, payload) {
             dispatch('setLoading', true);
+            firebase.firestore().collection("empleados").doc(payload).get().then(doc => {
+
+                commit('SET_EMPLOYEE', doc.data());
+                dispatch('setLoading', false);
+                dispatch('setAlert', { msg: 'Consulta de usuarios realizada con éxito', type: 'success' } );
+            }).catch( error => {
+                console.log(error);
+                dispatch('setLoading', false);
+                dispatch('setAlert', { msg: 'Error al traer los usuarios de la base de datos', type: 'danger' } );
+            });
+            //const employee = getters.getEmployees.find(employee => employee.id === payload);
+            
+            //commit('SET_EMPLOYEE', employee);
+            
+            /*dispatch('setLoading', true);
             employeesApi.getEmployee(payload)
             .then( response => { 
                 dispatch('setLoading', false);
@@ -89,10 +123,11 @@ export default  {
                 console.log(error);
                 dispatch('setLoading', false);
                 dispatch('setAlert', { msg: 'Error al traer el usuario de la base de datos', type: 'danger' } )
-            });
-        },
+            });*/
 
-        fetchRoles({ commit, dispatch }) {
+        },
+        
+        /*fetchRoles( {commit, getters} ) {
             rolesApi.getRoles()
             .then( response => {
                 commit('SET_ROLES', response.data.roles);
@@ -102,38 +137,51 @@ export default  {
                 console.log(error);
                 dispatch('setAlert', { msg: 'Error al traer los roles de la base de datos', type: 'danger' } )
             });
-        },
+        },*/
 
-        add ( context, payload) {
-            employeesApi.post(payload)
+        add ( {getters, dispatch}, payload) {
+            const employeeList = getters.getEmployees;
+
+            employeeList.push(payload);
+            dispatch('setAlert', { msg: 'Empleado creado con éxito', type: 'success' } );
+
+            /*employeesApi.post(payload)
             .then( response => console.log( response ) )
-            .catch( error => console.log(error) );
+            .catch( error => console.log(error) );*/
         },
 
-        edit ( context, payload) {
-            employeesApi.patch(payload)
+        edit ( {getters}, payload) {
+            const employeeList = getters.getEmployees;
+            const employeeIndex = employeeList.findIndex(employee => employee.id === payload.id);
+            
+            employeeList[employeeIndex] = payload;
+
+            /*employeesApi.patch(payload)
             .then( response => console.log( response ) )
-            .catch( error => console.log(error) );
+            .catch( error => console.log(error) );*/
         },
 
-        delete ( context, payload ){
+        /*delete ( context, payload ){
             employeesApi.delete(payload)
             .then( response => console.log(response) )
             .catch( error => console.log(error) );
-        },
+        },*/
 
-        setLoading( { commit }, payload) {
+        setLoading( {commit}, payload) {
             commit('SET_LOADING', payload);
         },
     },
 
     mutations: {
-        SET_EMPLOYEES(state, { employees }) {
-            state.employees_map = employees;
+        SET_EMPLOYEES(state, employees ) {
+            state.employees = employees;
         },
 
         SET_EMPLOYEE(state, employee) {
             state.employee_map = employee;
+            
+            const secondsToDate = state.employee_map.startDate.toDate();
+            state.employee_map.startDate = secondsToDate;
         },
 
         SET_ROLES(state,data) {

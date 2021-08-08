@@ -32,4 +32,8 @@ li {
 
 a {
     color: inherit !important;
+
+    &:active, &:focus, &:hover {
+        text-decoration: none !important;
+    }
 }

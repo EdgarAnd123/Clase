@@ -10,10 +10,6 @@ export default {
         'card-image': imageComponent
     },
 
-    created(){
-        this.$root.$store.dispatch("fetchRoles");
-    },
-
     computed: {
         workingHours() {
             return this.$root.$store.getters.getWorkingHours;
@@ -79,7 +75,7 @@ export default {
               return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
             }
             return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 9)}`;
-        }
+        },
     },
 
     filters: {

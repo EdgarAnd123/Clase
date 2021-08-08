@@ -11,11 +11,15 @@
         </b-form-group>
 
         <b-form-group id="telephone" label="Teléfono" label-for="telephone-input">
-            <b-form-input v-model="employee.phoneNumber" id="telephone-input" type="tel" @keydown="phoneNumberFormatter('telephone-input')" placeholder="Ingrese el teléfono de su nuevo empleado" min="10" required> </b-form-input>
+            <b-form-input v-model="employee.phoneNumber" id="telephone-input" type="tel" placeholder="Ingrese el teléfono de su nuevo empleado" min="10" required> </b-form-input>
         </b-form-group>
 
         <b-form-group id="emergencyNumber" label="Teléfono de emergencia" label-for="emergencyNumber-input">
             <b-form-input id="emergencyNumber-input" v-model="employee.emergencyNumber" type="tel" @keydown="phoneNumberFormatter('emergencyNumber-input')" placeholder="Ingrese un teléfono en caso de emergencia" min="10" required></b-form-input>
+        </b-form-group>
+
+        <b-form-group id="email" label="Correo electrónico" label-for="email-input">
+            <b-form-input id="email-input" v-model="employee.email" type="email" placeholder="Ingrese su correo electrónico" required></b-form-input>
         </b-form-group>
 
         <b-form-group id="socialNumber" label="Número de seguro social" label-for="socialNumber-input">

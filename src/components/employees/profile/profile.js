@@ -1,5 +1,6 @@
 import imageComponent from "../../shared/image/image.vue"
 import loaderComponent from "../../loader/loader.vue"
+import moment from 'moment'
 
 export default {
     name: 'profileEmployee',
@@ -16,7 +17,7 @@ export default {
     },
     beforeRouteEnter(to, from, next) {
         next( (vue) => { 
-            vue.$root.$store.dispatch("fetchEmployee", vue.$route.params.id);
+            vue.$root.$store.dispatch("fetchEmployee", vue.$route.params.id.toString());
             vue.$root.$store.dispatch("initializeHeader", {title: 'Detalles del empleado'} );
         } )
     },
@@ -121,11 +122,13 @@ export default {
 
             return `$${value} pesos`;
         },
-
         phoneFormat: function(value) {
             if (!value) return '';
             
             return "(" + value.substring(0,3) + ") " + value.substring(3,6) + "-" + value.substring(6);
+        },
+        dateFormat: function(value){
+            return value ? moment(value).format('L') : '';            
         }
     }
 }

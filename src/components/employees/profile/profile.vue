@@ -1,55 +1,53 @@
 <template>
     <div class="profile">
         <loader-component :loading="isLoading"></loader-component>
-        <div class="profile__information">
+        <div class="profile__card">
             <card-image :imageSize="125" :name="validateString(employee.name, 0)" :lastName="validateString(employee.lastName, 0)" :imageUrl="employee.profileImage" :editable='false'></card-image>
-            <div>
-                <p class="text-bold text-center"> {{employee.name}} {{employee.lastName}} </p>
-                <p class="text-center"> {{employee.role}} </p>
-            </div>
-
-            <p v-if="employee.endDate" class="text-danger"> <span class="font-weight-bold"> Fecha terminación laboral: </span>
-                {{ employee.endDate }}
-            </p>
-            
-            <div class="profile__contact">
-                <p> <span class="font-weight-bold"> Teléfono </span> 
+            <div class="card__information">
+                <div class="information__user">
+                    <p class="font-weight-bold"> {{employee.name}} {{employee.lastName}} </p>
+                    <p> {{employee.role}} </p>
+                    <p v-if="employee.endDate" class="text-danger"> <span class="font-weight-bold"> Fecha terminación laboral: </span>
+                    {{ employee.endDate | dateFormat }}
+                </p>
+                </div>
+                <p> <span class="font-weight-bold information__text-color"> Teléfono </span> 
                     {{ employee.phoneNumber}} 
                 </p>
-                <p> <span class="font-weight-bold"> Emergencia </span>  
+                <p> <span class="font-weight-bold information__text-color"> Emergencia </span>  
                     {{ employee.emergencyNumber}}
                 </p>
-                <p> <span class="font-weight-bold"> Fecha inicio </span>  
-                    {{employee.startDate }} 
+                <p> <span class="font-weight-bold information__text-color"> Fecha inicio </span>  
+                    {{employee.startDate | dateFormat }} 
                 </p>
-                <p> <span class="font-weight-bold"> Jornada </span> 
+                <p> <span class="font-weight-bold information__text-color"> Jornada </span> 
                     {{ employee.workingHours }} horas
                 </p>
-                <p> <span class="font-weight-bold"> NSS </span> 
+                <p> <span class="font-weight-bold information__text-color"> NSS </span> 
                     {{ employee.socialNumber }} 
                 </p>
-                <p> <span class="font-weight-bold"> RFC </span> 
+                <p> <span class="font-weight-bold information__text-color"> RFC </span> 
                     {{ employee.rfc }} 
                 </p>
             </div>
         </div>
 
         <div class="profile__economics">
-            <p class="text-bold text-center"> Cálculos de prestaciones económicas </p>
-            <div class="separator">
-                <p class="text-small text-bold "> Sueldo </p>
-                <b-form-select v-model="selectedSalaryPeriod" :options="salaryFilters" size="sm" placeholder="Periodo" @change="onChange($event)">
+            <p class="font-weight-bold text-center"> Cálculos de prestaciones económicas </p>
+            <div class="separator economics__salary">
+                <p class="text-small font-weight-bold economics__text"> Sueldo </p>
+                <b-form-select v-model="selectedSalaryPeriod" class="economics__select" :options="salaryFilters" size="sm" placeholder="Periodo" @change="onChange($event)">
                     <template #first>
                         <b-form-select-option :value="null" disabled> Selecciona un filtro para el salario </b-form-select-option>
                     </template>
                 </b-form-select>
-                <p class="text-small text-center"> <span class="text-bold"> El pago corresponde a: </span> {{ salary | toUSD }} </p>
+                <p class="text-small text-center economics__summary"> <span class="font-weight-bold"> El pago corresponde a: </span> {{ salary | toUSD }} </p>
             </div>
             <div class="separator">
-                <p class="text-small"> <span class="text-bold"> Prima vacacional: </span> {{ vacationBonus | toUSD }} </p>
+                <p class="text-small"> <span class="font-weight-bold"> <font-awesome-icon icon="plane-departure"/> Prima vacacional: </span> {{ vacationBonus | toUSD }} </p>
             </div>
             <div class="separator">
-                <p class="text-small"> <span class="text-bold"> Aguinaldo: </span> {{ christmasBonus | toUSD }} </p>
+                <p class="text-small"> <span class="font-weight-bold"> <font-awesome-icon icon="hand-holding-usd"/> Aguinaldo: </span> {{ christmasBonus | toUSD }} </p>
             </div>
         </div>
 

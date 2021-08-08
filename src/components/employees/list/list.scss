@@ -23,11 +23,14 @@
 
 .list__employees {
     max-width: 500px;
-    padding: 0 1rem;
 
     .card-container {
         display: grid;
         grid-template-columns: 1fr;
+    }
+
+    .floating_container {
+        position: sticky;
     }
 }
 

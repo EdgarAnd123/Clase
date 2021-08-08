@@ -7,7 +7,6 @@ import VueRouter from 'vue-router'
 import routes from './routing/routes'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
-import { far } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { BootstrapVue } from 'bootstrap-vue'
 import PortalVue from 'portal-vue'
@@ -15,15 +14,15 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.min.css'
 
 //Font Awesome
-library.add(far,fas)
-Vue.component('font-awesome-icon', FontAwesomeIcon)
+library.add(fas);
+Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 Vue.use(VueRouter);
 Vue.use(BootstrapVue);
 Vue.use(PortalVue);
 
-Vue.prototype.$axios = Axios
-Vue.prototype.$store = store
+Vue.prototype.$axios = Axios;
+Vue.prototype.$store = store;
 
 const router = new VueRouter({
 	routes,
@@ -58,8 +57,15 @@ var firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-firebase.auth().onAuthStateChanged(user => {
-  store.dispatch("fetchUser", user);
+firebase.auth().onAuthStateChanged( (user) => {
+  if(user){
+    firebase.firestore().collection("usuarios").doc(user.uid).get().then(doc => {
+      //console.log(doc);
+      //console.log("Antes de fetch");
+      store.dispatch("fetchUser", doc.data());
+    });
+  }
+
 });
 
 new Vue({
