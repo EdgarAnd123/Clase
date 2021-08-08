@@ -2,7 +2,7 @@
     <div class="profile">
         <loader-component :loading="isLoading"></loader-component>
         <div class="profile__card">
-            <card-image :imageSize="125" :name="validateString(employee.name, 0)" :lastName="validateString(employee.lastName, 0)" :imageUrl="employee.profileImage" :editable='false'></card-image>
+            <card-image :imageSize="125" :name="validateString(employee.name, 0)" :lastName="validateString(employee.lastName, 0)" :imageUrl="employee.profileImage" :editable='false' :isActive="employee.activeEmployee"></card-image>
             <div class="card__information">
                 <div class="information__user">
                     <p class="font-weight-bold"> {{employee.name}} {{employee.lastName}} </p>
