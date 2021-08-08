@@ -1,6 +1,7 @@
 //import employeesApi from "@/api/employees.api.js"
 //import rolesApi from "@/api/roles.api.js"
 import firebase from 'firebase';
+//import moment from 'moment';
 
 export default  {
     state: {
@@ -98,7 +99,7 @@ export default  {
         fetchEmployee( { commit, dispatch }, payload) {
             dispatch('setLoading', true);
             firebase.firestore().collection("empleados").doc(payload).get().then(doc => {
-                console.log(doc.data());
+
                 commit('SET_EMPLOYEE', doc.data());
                 dispatch('setLoading', false);
                 dispatch('setAlert', { msg: 'Consulta de usuarios realizada con éxito', type: 'success' } );
@@ -178,6 +179,9 @@ export default  {
 
         SET_EMPLOYEE(state, employee) {
             state.employee_map = employee;
+            
+            const secondsToDate = state.employee_map.startDate.toDate();
+            state.employee_map.startDate = secondsToDate;
         },
 
         SET_ROLES(state,data) {
