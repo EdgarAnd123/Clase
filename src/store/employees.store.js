@@ -182,6 +182,11 @@ export default  {
             
             const secondsToDate = state.employee_map.startDate.toDate();
             state.employee_map.startDate = secondsToDate;
+
+            if(state.employee_map.endDate){
+                const secondsToDate = state.employee_map.endDate.toDate();
+                state.employee_map.endDate = secondsToDate;
+            }
         },
 
         SET_ROLES(state,data) {

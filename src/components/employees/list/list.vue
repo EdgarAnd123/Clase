@@ -15,7 +15,7 @@
             <template>
                 <transition-group name="list" tag="div" class="card-container">
                     <template v-for="(employee,index) in employees">
-                        <card :index="index" :key="index" firstColumnWidth="25" secondColumnWidth="55" thirdColumnWidth="15" :class="{'card-inactive': !employee.activeEmployee}">
+                        <card :index="index" :key="index" firstColumnWidth="25" secondColumnWidth="55" thirdColumnWidth="15">
                             <template v-slot:controls>
                                 <font-awesome-icon class="card__icon" icon="utensils"/>
                                 <font-awesome-icon class="card__icon" icon="sign-out-alt"/>
@@ -44,7 +44,6 @@
                                 </router-link>
                             </template>
                         </card>
-                        
                     </template>
                 </transition-group>
                 <router-link class="btn btn-floating" tag="button" :to="{name: 'create-employee'}"> <font-awesome-icon icon="plus"/> </router-link>
