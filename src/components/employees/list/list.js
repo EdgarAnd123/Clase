@@ -51,6 +51,15 @@ export default {
       }
     }      
   },
+  methods: {
+    validateArray(arr, field){
+      if (arr && arr.length > 0){
+          return arr[arr.length -1][field];
+      }
+      
+      return '--:--'
+  },
+  },
 
   watch: {
     employees() {
@@ -66,12 +75,12 @@ export default {
 
       return value;
     },
-    formatActiveStatusText: function(value) {
-      if (value) {
-        return 'Activo';
+    validateTimings(value){
+      if(!value){
+          return '--:--'
       }
 
-      return 'Inactivo';
-    }
+      return value
+  }
   }
 }

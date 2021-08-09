@@ -12,6 +12,8 @@ import { BootstrapVue } from 'bootstrap-vue'
 import PortalVue from 'portal-vue'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.min.css'
+import Vue2TouchEvents from 'vue2-touch-events'
+
 
 //Font Awesome
 library.add(fas);
@@ -20,6 +22,7 @@ Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.use(VueRouter);
 Vue.use(BootstrapVue);
 Vue.use(PortalVue);
+Vue.use(Vue2TouchEvents);
 
 Vue.prototype.$axios = Axios;
 Vue.prototype.$store = store;

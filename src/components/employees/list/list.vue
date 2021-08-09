@@ -15,24 +15,36 @@
             <template>
                 <transition-group name="list" tag="div" class="card-container">
                     <template v-for="(employee,index) in employees">
-                        <router-link :key="index" :to="{name: 'profile-employee', params: { id: employee.id} }">
-                            <card :key="index" firstColumnWidth="25" secondColumnWidth="75" :class="{'card-inactive': !employee.activeEmployee}">
-                                <template v-slot:firstColumn>
-                                    <card-image :imageSize="80" :name="employee.name[0]" :lastName="employee.lastName[0]" :imageUrl="employee.profileImage" :editable='false' :isActive="employee.activeEmployee"></card-image>
-                                </template>
-                                <template v-slot:secondColumn>
-                                    <p class="card__title"> {{employee.name}} {{employee.lastName}} </p>
-                                    <p class="card__text"> {{employee.role}} | <span class="font-weight-bold"> {{ employee.activeEmployee | formatActiveStatusText }} </span> </p>
-                                    <p class="card__text"> 
-                                        <font-awesome-icon class="card__icon" icon="phone-alt"/> {{employee.phoneNumber}} 
-                                    </p>
-                                    <!--<p class="card__text"> 
-                                        <font-awesome-icon class="card__icon" icon="phone-alt"/> <span class="card__text-emergency"> {{employee.emergencyNumber | phoneFormat}} </span>
-                                    </p>-->
-                                </template>
-                            </card>
-                            <hr>
-                        </router-link>
+                        <card :index="index" :key="index" firstColumnWidth="25" secondColumnWidth="55" thirdColumnWidth="15" :class="{'card-inactive': !employee.activeEmployee}">
+                            <template v-slot:controls>
+                                <font-awesome-icon class="card__icon" icon="utensils"/>
+                                <font-awesome-icon class="card__icon" icon="sign-out-alt"/>
+                            </template>
+                            <template v-slot:firstColumn>
+                                <card-image :imageSize="80" :name="employee.name[0]" :lastName="employee.lastName[0]" :imageUrl="employee.profileImage" :editable='false' :isActive="employee.activeEmployee"></card-image>
+                            </template>
+                            <template v-slot:secondColumn>
+                                <p class="card__title"> {{employee.name}} {{employee.lastName}} <span class="card__title-secondary"> #{{ employee.id }} </span></p>
+                                <p class="card__text"> {{employee.role}} | <span> Sucursal {{ employee.store }} </span> </p>
+                                <p class="card__text"> 
+                                    <font-awesome-icon class="card__icon" icon="phone-alt"/> {{employee.phoneNumber}} 
+                                </p>
+                                <div class="card__timings">
+                                    <span> <font-awesome-icon class="card__icon icon" icon="user-clock"/> {{ validateArray(employee.timings, 'checkIn') }} </span>
+                                    <span> <font-awesome-icon class="card__icon icon" icon="utensils"/> {{ validateArray(employee.timings, 'mealTime') }} </span>
+                                    <span> <font-awesome-icon class="card__icon icon" icon="door-open"/>  {{ validateArray(employee.timings, 'checkOut') }} </span>
+                                </div>
+                                <!--<p class="card__text"> 
+                                    <font-awesome-icon class="card__icon" icon="phone-alt"/> <span class="card__text-emergency"> {{employee.emergencyNumber | phoneFormat}} </span>
+                                </p>-->
+                            </template>
+                            <template v-slot:thirdColumn>
+                                <router-link :key="index" :to="{name: 'profile-employee', params: { id: employee.id} }">
+                                    <font-awesome-icon class="card__icon text-center" icon="chevron-right"/>
+                                </router-link>
+                            </template>
+                        </card>
+                        
                     </template>
                 </transition-group>
                 <router-link class="btn btn-floating" tag="button" :to="{name: 'create-employee'}"> <font-awesome-icon icon="plus"/> </router-link>

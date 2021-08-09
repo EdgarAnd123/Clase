@@ -1,6 +1,6 @@
 <template>
     <b-form id="employeeForm" class="form" @submit="triggerParentMethod">
-        <card-image v-model="employee.profileImage" :imageUrl="employee.profileImage" :imageSize="125" :name="validateString(employee.name, 0)" :lastName="validateString(employee.lastName, 0)" :editable='true'></card-image>
+        <card-image v-model="employee.profileImage" :imageUrl="employee.profileImage" :imageSize="125" :name="validateString(employee.name, 0)" :lastName="validateString(employee.lastName, 0)" :editable='true' :isActive="employee.activeEmployee"></card-image>
 
         <b-form-group id="name" label="Nombre" label-for="name-input">
             <b-form-input id="name-input" v-model="employee.name" type="text" placeholder="Ingrese el nombre de su nuevo empleado" required></b-form-input>
