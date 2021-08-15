@@ -18,7 +18,3 @@
 </template>
 
 <script src="./card.js"></script>
-<style scoped lang="scss">
-    @import './card.scss';
-</style>
-

@@ -1,5 +1,13 @@
-@import 'reset';
-@import 'elements';
-@import 'transitions';
+@import "utils/mixins";
+@import "utils/transitions";
+@import "utils/variables";
 
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
+@import "components/card";
+@import "components/elements";
+@import "components/employee-form";
+@import "components/image";
+
+@import "core/reset";
+@import "core/typography";
+
+@import "layout/header";

@@ -16,5 +16,5 @@
 
 <script src="./login.js"></script>
 <style scoped lang="scss">
-    @import './login.scss';
+    @import '@/styles/pages/login.scss';
 </style>

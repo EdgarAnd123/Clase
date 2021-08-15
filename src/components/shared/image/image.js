@@ -49,6 +49,14 @@ export default {
 			}
 		},
 
+		image__names_size_calculation() {
+			return {
+				'--width': `${this.imageSize}px`,
+				'--height': `${this.imageSize}px`,
+				'--fontSize': `${this.imageSize / 3}px`
+			};
+		},
+
 		image() {
 			return this.imageUrl || this.imageSrc;
 		}

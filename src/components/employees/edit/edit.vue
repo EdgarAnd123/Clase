@@ -1,5 +1,5 @@
 <template>
-  <div class="edit__wrapper">
+  <div class="edit">
     <loader-component :loading="isLoading"></loader-component>
     <employee-form :employee="employee"></employee-form>
   </div>
@@ -7,5 +7,5 @@
 
 <script src="./edit.js"></script>
 <style scoped lang="scss">
-    @import './edit.scss';
+  @import '@/styles/pages/employee/edit.scss';
 </style>

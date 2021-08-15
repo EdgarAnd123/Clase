@@ -1,0 +1,110 @@
+@import '../../utils//mixins';
+
+.profile {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 1rem;
+    grid-gap: 2rem 0;
+
+    &-card {
+        border: 2px solid $border;
+        border-radius: .5rem;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(5, min-content);
+        grid-gap: 1rem 0;
+        background: $white;
+        padding-bottom: 1rem;
+
+        .image {
+            grid-area: 1 / 1 / 1 / 3;
+            padding: 1rem 0;
+            background: $light-background-color;
+            border-radius: .5rem .5rem 0 0;
+        }
+
+        &__wrapper {
+            grid-area: 2 / 1 / 2 / 3;
+            display: grid;
+            grid-template-columns: 1fr;
+            text-align: center;
+        }
+
+        &__phone-number {
+            grid-area: 3 / 1 / 3 / 2;
+        }
+
+        &__emergency-number {
+            grid-area: 3 / 2 / 3 / 3;
+        }
+
+        &__start-date {
+            grid-area: 4 / 1 / 4 / 2;
+        }
+
+        &__working-hours {
+            grid-area: 4 / 2 / 4 / 3;
+        }
+
+        &__social-number {
+            grid-area: 5 / 1 / 5 / 2;
+        }
+
+        &__rfc {
+            grid-area: 5 / 2 / 5 / 3;
+        }
+
+        &__text {
+            padding: 0 1rem;
+            word-break: break-all;
+        }
+
+        &__text-highlight {
+            color: $purple-400;
+            font-weight: 700;
+        }
+
+        &__text-block {
+            display: block;
+        }
+    }
+
+    .economics {
+        display: grid;
+        grid-gap: .5rem 0;
+
+        &__salary {
+            display: grid;
+            grid-template-columns: min-content 1fr;
+            grid-template-rows: repeat(2, min-content);
+            grid-gap: .5rem;
+        }
+
+        &__text {
+            grid-area: 1 / 1 / 1 / 2;
+            place-self: center;
+            font-weight: 700;
+        }
+
+        &__select {
+            grid-area: 1 / 2 / 1 / 3;
+            place-self: center;
+        }
+
+        &__summary {
+            grid-area: 2 / 1 / 2 / 3;
+            background: $primary-background-lighter;
+            padding: .5rem 0;
+            text-align: center;
+        }
+    }
+}
+
+.separator {
+    border-bottom: 1.5px solid $border;
+    margin: .5rem 0;
+}
+
+.text-small {
+    font-size: .87rem;
+}

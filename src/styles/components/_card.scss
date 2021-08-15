@@ -2,14 +2,14 @@
     display: grid;
     grid-template-columns: 6% 94%;
     grid-template-rows: 1fr;
-    background: #7F4590;
+    background: $primary-background-darker-color;
 
     .card__controls {
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: repeat(2, 1fr);
         place-items: center end;
-        color: #FFFFFF;
+        color: $white;
     }
 
     .card {
@@ -22,22 +22,22 @@
         box-shadow: 0 0 2px 0 rgba(0, 0, 0, .5);
         width: 100vw;
         transform: translateX(-20px);
-        
+
         .card__title {
             font-size: 1rem;
             font-weight: 700;
         }
-    
+
         .card__title-secondary {
-            color: gray;
+            color: $secondary-text-color;
         }
-    
+
         .card__text {
             font-size: .87rem;
         }
     
         .card__icon {
-            color: #4b4b4b;
+            color: $secondary-text-color;
         }
     
         .card__timings {
@@ -56,7 +56,7 @@
     
             a {
                 padding: 2rem 1rem;
-                border-left: .1rem solid lightgray;
+                border-left: .1rem solid $border;
             }
         }
 

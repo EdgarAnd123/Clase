@@ -1,5 +1,5 @@
 <template>
-    <div id="alert">
+    <div class="alert">
         <b-alert
             :show="status"
             dismissible
@@ -12,5 +12,5 @@
 
 <script src="./alert.js"></script>
 <style scoped lang="scss">
-    @import './alert.scss';
+    @import '@/styles/components/alert.scss';
 </style>

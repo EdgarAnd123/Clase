@@ -38,14 +38,14 @@
             </b-form-select>
         </b-form-group>
 
-        <div class="formGroup__salary">
+        <div class="form__group-salary">
             <b-form-group id="workinghours" label="Horas de trabajo" label-for="range-workingHours">
-                    <b-form-input class="formGroup__workingHours__input" id="range-workingHours" v-model="employee.workingHours" type="range" min="4" max="12" required></b-form-input>
-                    <span class="formGroup__workingHours__text"> {{employee.workingHours | defaultValue }} </span>
-                </b-form-group>
+                    <b-form-input class="form__working-hours-input" id="range-workingHours" v-model="employee.workingHours" type="range" min="4" max="12" required></b-form-input>
+                    <span class="form__working-hours-text"> {{employee.workingHours | defaultValue }} </span>
+            </b-form-group>
             <b-form-group id="baseSalary" label="Salario diario" label-for="baseSalary-select">
-                <span class="salary__dolar_symbol">$</span>
-                <b-form-input class="salary__input" id="baseSalary-input" v-model="employee.baseSalary" type="number" placeholder="0" required></b-form-input>
+                <span class="form__dolar-symbol">$</span>
+                <b-form-input class="form__salary-input" id="baseSalary-input" v-model="employee.baseSalary" type="number" placeholder="0" required></b-form-input>
             </b-form-group>
         </div>
 
@@ -57,11 +57,11 @@
             <b-form-file @change="onFileChange($event)" id="attachment" v-model="employee.attachment" size="sm" placeholder="Presione el botón para subir un archivo"></b-form-file>
         </b-form-group>
 
-        <b-button class="mr-1 btn-block" block variant="primary" type="submit"> Guardar usuario </b-button>
+        <b-button class="mr-1" block variant="primary" type="submit"> Guardar usuario </b-button>
     </b-form>
 </template>
 
 <script src="./employee.js"></script>
 <style scoped lang="scss">
-    @import './employee.scss';
+    @import '@/styles/components/employee-form.scss';
 </style>
