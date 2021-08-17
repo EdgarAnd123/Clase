@@ -1,7 +1,12 @@
-![image](https://user-images.githubusercontent.com/22825593/127802880-3aacb84e-e15a-40a5-888a-c6367ecad86d.png)
-![image](https://user-images.githubusercontent.com/22825593/127802907-ed1f3649-caf6-4bcd-b6a6-77ee26c9f846.png)
-![image](https://user-images.githubusercontent.com/22825593/127803186-0d846f12-0933-4e05-b42a-bc2615fe0071.png)
-![image](https://user-images.githubusercontent.com/22825593/127803218-3f3c5010-535e-413f-a3eb-d860747eda8d.png)
-![image](https://user-images.githubusercontent.com/22825593/127803227-c7c53bec-da59-4820-8aa4-5b097f107212.png)
-![image](https://user-images.githubusercontent.com/22825593/127803237-2bc18d08-92a3-492b-9519-4bac77e8ffcd.png)
-![image](https://user-images.githubusercontent.com/22825593/127803458-bf103605-545c-4cba-85bc-4c697855e7fe.png)
+# Important
+This project is being developed for mobile devices, tablet and desktop support will come after.
+
+## Usage
+Visit the following link in a mobile device or using the device simulator of developer tools (F12) from web browsers:
+https://edgarand123.github.io/employee-management/
+
+![image](https://user-images.githubusercontent.com/22825593/129615495-8099df35-1c2a-4ad4-8fd5-e34ade25342f.png)
+![image](https://user-images.githubusercontent.com/22825593/129615560-ae61f340-ae1f-442c-9411-33a5e22c8c52.png)
+![image](https://user-images.githubusercontent.com/22825593/129615663-ce509325-a332-45de-867a-f9dadb433797.png)
+![image](https://user-images.githubusercontent.com/22825593/129615717-f9ea1fbc-bc89-49f3-a712-46c98caa21ef.png)
+![image](https://user-images.githubusercontent.com/22825593/129615810-21430c31-5237-4379-9be8-78face23c529.png)
