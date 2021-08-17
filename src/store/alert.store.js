@@ -19,24 +19,16 @@ export default {
 
         shutDownAlert({ commit }){
             commit('SHUT_DOWN_ALERT');
-        },
-
-        enableAlert({ commit }){
-            commit('ENABLE_ALERT');
         }
     },
     mutations: {
         SET_ALERT(state, alert){
             state.alertQueue.push( { message: alert.msg, type: alert.type} );
-            setTimeout(()=> state.active = true, 500);
+            state.active = true;
         },
 
         SHUT_DOWN_ALERT(state){
             state.active = false;
-        },
-
-        ENABLE_ALERT(state){
-            state.active = true;
         }
     }
 }

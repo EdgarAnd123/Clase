@@ -10,9 +10,4 @@ export default {
             opacity: .5
         }
     }
-    /*computed: {
-        loading() {
-            return this.$root.$store.getters.getLoading;
-        }
-    }*/
 }

@@ -1,3 +1,6 @@
+import moment from 'moment'
+import firebase from 'firebase'
+
 export default {
     props: {
         firstColumnWidth: {
@@ -6,7 +9,8 @@ export default {
         },
         secondColumnWidth: String,
         thirdColumnWidth: String,
-        index: Number
+        uid: String,
+        isActive: Boolean
     },
     data() {
         return {
@@ -14,11 +18,13 @@ export default {
                 elementXPosition: '',
                 touchedXPosition: '',
                 lastElementXPosition: ''
-            }
+            },
+            currentDate: null
         }
     },
     mounted() {
-        this.swipeCard(`card-${this.index}`);
+        this.swipeCard(`card-${this.uid}`);
+        this.currentDate = new Date();
     },
     computed: {
         gridColumns() {
@@ -47,5 +53,63 @@ export default {
                 cardElement.style.left = `${( (this.elementXPosition + movedInX > 35) ? 35 : (this.elementXPosition + movedInX < 0) ? 0 : this.elementXPosition + movedInX )}px`;
             }, false)
         },
+
+        setClockIn() {
+            const currentHours = this.currentDate.getHours();
+            const currentMinutes = this.currentDate.getMinutes();
+            const formattedDate = moment(this.currentDate).format('L');
+      
+            firebase.firestore().collection("empleados").doc(this.uid).update(
+              {
+                activeEmployee: true,
+                timings: firebase.firestore.FieldValue.arrayUnion(
+                  {
+                    clockIn: `${currentHours}:${currentMinutes}`,
+                    date: formattedDate
+                  }
+                )
+              }
+            )
+          },
+
+          setMealTime() {
+            const currentHours = this.currentDate.getHours();
+            const currentMinutes = this.currentDate.getMinutes();
+
+            firebase.firestore().collection("empleados").doc(this.uid).get()
+            .then( (doc) => {
+              var timings = doc.data().timings;
+              var timingToUpdate = timings[timings.length - 1];
+
+              timingToUpdate.mealTime = `${currentHours}:${currentMinutes}`;
+              timings[timings.length - 1] = timingToUpdate;
+
+              firebase.firestore().collection("empleados").doc(this.uid).update(
+                {
+                  timings: timings
+                }
+              )
+            })
+          },
+
+          setClockOut() {
+            const currentHours = this.currentDate.getHours();
+            const currentMinutes = this.currentDate.getMinutes();
+
+            firebase.firestore().collection("empleados").doc(this.uid).get()
+            .then( (doc) => {
+              var timings = doc.data().timings;
+              var timingToUpdate = timings[timings.length - 1];
+              
+              timingToUpdate.clockOut = `${currentHours}:${currentMinutes}`;
+              timings[timings.length - 1] = timingToUpdate;
+
+              firebase.firestore().collection("empleados").doc(this.uid).update(
+                {
+                  timings: timings
+                }
+              )
+            })
+          }
     }
 }   

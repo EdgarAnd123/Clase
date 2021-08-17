@@ -1,6 +1,5 @@
 import cardComponent from "../../shared/card/card.vue"
 import imageComponent from "../../shared/image/image.vue"
-import alertComponent from "../../shared/alert/alert.vue"
 import loaderComponent from "../../loader/loader.vue"
 import { mapGetters } from "vuex"
 
@@ -9,7 +8,6 @@ export default {
   components: {
     'card': cardComponent,
     'card-image': imageComponent,
-    'alert': alertComponent,
     'loader-component': loaderComponent,
   },
 
@@ -51,6 +49,8 @@ export default {
       }
     }      
   },
+
+
   methods: {
     validateArray(arr, field){
       if (arr && arr.length > 0){
@@ -58,7 +58,7 @@ export default {
       }
       
       return '--:--'
-  },
+    }
   },
 
   watch: {
@@ -81,6 +81,6 @@ export default {
       }
 
       return value
-  }
+    }
   }
 }

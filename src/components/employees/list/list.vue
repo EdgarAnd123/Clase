@@ -32,15 +32,12 @@
         <transition-group name="list" tag="div" class="list__container">
           <template v-for="(employee, index) in employees">
             <card
-              :index="index"
+              :uid="employee.id"
               :key="index"
               firstColumnWidth="25"
               secondColumnWidth="55"
-              thirdColumnWidth="15">
-              <template v-slot:controls>
-                <font-awesome-icon class="card__icon" icon="utensils"/>
-                <font-awesome-icon class="card__icon" icon="sign-out-alt"/>
-              </template>
+              thirdColumnWidth="15"
+              :isActive="employee.activeEmployee">
               <template v-slot:firstColumn>
                 <card-image
                   :imageSize="80"
@@ -71,24 +68,21 @@
                     <font-awesome-icon
                       class="card__icon icon"
                       icon="user-clock"/>
-                    {{ validateArray(employee.timings, "checkIn") }}
+                    {{ validateArray(employee.timings, "clockIn") | validateTimings() }}
                   </span>
                   <span>
                     <font-awesome-icon
                       class="card__icon icon"
                       icon="utensils"/>
-                    {{ validateArray(employee.timings, "mealTime") }}
+                    {{ validateArray(employee.timings, "mealTime") | validateTimings()  }}
                   </span>
                   <span>
                     <font-awesome-icon
                       class="card__icon icon"
                       icon="door-open"/>
-                    {{ validateArray(employee.timings, "checkOut") }}
+                    {{ validateArray(employee.timings, "clockOut") | validateTimings()  }}
                   </span>
                 </div>
-                <!--<p class="card__text"> 
-                  <font-awesome-icon class="card__icon" icon="phone-alt"/> <span class="card__text-emergency"> {{employee.emergencyNumber | phoneFormat}} </span>
-                </p>-->
               </template>
               <template v-slot:thirdColumn>
                 <router-link

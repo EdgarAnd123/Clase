@@ -71,11 +71,15 @@
     position: relative;
     opacity: .6;
     pointer-events: none;
+}
 
-    .card__inactive__button {
-        z-index: 1;
-        position: absolute;
-        top: 0;
-        left: 0;
-    }
+.card-inactive__button {
+    z-index: 3;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    width: 38% !important;
+    transform: translateX(80%);
+    background-color: $primary-background-button-lighter !important;
 }

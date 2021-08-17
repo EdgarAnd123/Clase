@@ -1,7 +1,6 @@
 //import employeesApi from "@/api/employees.api.js"
 //import rolesApi from "@/api/roles.api.js"
 import firebase from 'firebase';
-//import moment from 'moment';
 
 export default  {
     state: {
@@ -70,7 +69,24 @@ export default  {
     actions: {
         fetchEmployees( { commit, dispatch } ) {
             dispatch('setLoading', true);
-            firebase.firestore().collection("empleados").get().then(response => {
+            firebase.firestore().collection("empleados").onSnapshot(snapshot => {
+                let  docs = [];
+                snapshot.forEach(doc => {
+                    let data = doc.data();
+                    data.id = doc.id;
+                    docs.push(data);
+                })
+                
+                commit('SET_EMPLOYEES', docs);
+                dispatch('setLoading', false);
+                dispatch('setAlert', { msg: 'Consulta de usuarios realizada con éxito', type: 'success' } );
+            }, ( error) => {
+                console.log(error);
+                dispatch('setLoading', false);
+                dispatch('setAlert', { msg: 'Error al traer los usuarios de la base de datos', type: 'danger' } );
+            });
+            
+            /*firebase.firestore().collection("empleados").get().then(response => {
                 const docs = response.docs.map( doc => doc.data() );
 
                 commit('SET_EMPLOYEES', docs);
@@ -80,7 +96,7 @@ export default  {
                 console.log(error);
                 dispatch('setLoading', false);
                 dispatch('setAlert', { msg: 'Error al traer los usuarios de la base de datos', type: 'danger' } );
-            });
+            });*/
 
             /*employeesApi.getEmployees()
             .then(response => { 

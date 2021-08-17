@@ -19,10 +19,7 @@ export default {
     
     watch: {
         status(){
-            //We need to call alertIterator() twice because setInterval
-            //won't execute it until time lapses.
             this.alertIterator();
-            this.alertInterval = setInterval(this.alertIterator, 1500);
         }
     },
 
@@ -39,7 +36,7 @@ export default {
             this.alertType = this.alerts[0].type;
 
             this.alerts.shift();
-
+            this.alertInterval = setInterval(this.alertIterator, 2500);
         }
     }
 }
