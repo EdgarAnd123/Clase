@@ -2,6 +2,8 @@ import cardComponent from "../../shared/card/card.vue"
 import imageComponent from "../../shared/image/image.vue"
 import loaderComponent from "../../loader/loader.vue"
 import { mapGetters } from "vuex"
+import moment from 'moment'
+import { updateDoc, arrayUnion } from '@/api/firebase/firebase'
 
 export default {
   name: 'listEmployees',
@@ -15,7 +17,8 @@ export default {
     return {
       selectedFilter: 'all',
       searchValue: '',
-      employeesCounter: 0
+      employeesCounter: 0,
+      currentDate: null
     }
   },
 
@@ -50,14 +53,39 @@ export default {
     }      
   },
 
-
   methods: {
-    validateArray(arr, field){
+    validateArray(arr, field) {
       if (arr && arr.length > 0){
           return arr[arr.length -1][field];
       }
       
       return '--:--'
+    },
+    registerTime(workReason) {
+      const currentHours = this.currentDate.getHours();
+      const currentMinutes = this.currentDate.getMinutes();
+      const formattedDate = moment(this.currentDate).format('L');
+
+      if(workReason === 'clockIn') {
+          updateDoc('empleados', this.uid, {
+              activeEmployee: true,
+              timings: arrayUnion({
+                  date: formattedDate,
+                  clockIn: `${currentHours}:${currentMinutes}`
+              })
+          });
+      } else {
+          //const employeeList = this.$root.$store.getters.getEmployees;
+          let employeeIndex = this.employee.findIndex(employee => 
+              employee.id === this.uid);
+          let timings = employees[employeeIndex].timings;
+          let timingToUpdate = timings[timings.length - 1];
+
+          timingToUpdate[workReason] = `${currentHours}:${currentMinutes}`;
+          timings[timings.length - 1] = timingToUpdate;
+
+          updateDoc('empleados', this.uid, {'timings': timings} );
+      }
     }
   },
 

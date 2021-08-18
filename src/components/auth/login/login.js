@@ -1,4 +1,4 @@
-import firebase from 'firebase';
+import { auth } from '@/api/firebase/firebase';
 
 export default {
 	data() {
@@ -10,7 +10,7 @@ export default {
 
 	methods: {
 		login() {
-			firebase.auth().signInWithEmailAndPassword(this.username, this.password)
+			auth.signInWithEmailAndPassword(this.username, this.password)
 			.then(
 				() => this.$router.push('employees'),
 				error => {

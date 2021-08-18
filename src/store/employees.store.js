@@ -1,6 +1,6 @@
 //import employeesApi from "@/api/employees.api.js"
 //import rolesApi from "@/api/roles.api.js"
-import firebase from 'firebase';
+import { employeesCollection } from '@/api/firebase/firebase';
 
 export default  {
     state: {
@@ -69,7 +69,7 @@ export default  {
     actions: {
         fetchEmployees( { commit, dispatch } ) {
             dispatch('setLoading', true);
-            firebase.firestore().collection("empleados").onSnapshot(snapshot => {
+            employeesCollection.onSnapshot(snapshot => {
                 let  docs = [];
                 snapshot.forEach(doc => {
                     let data = doc.data();
@@ -114,11 +114,11 @@ export default  {
 
         fetchEmployee( { commit, dispatch }, payload) {
             dispatch('setLoading', true);
-            firebase.firestore().collection("empleados").doc(payload).get().then(doc => {
-
+            employeesCollection.doc(payload).get().then(doc => {
                 commit('SET_EMPLOYEE', doc.data());
                 dispatch('setLoading', false);
                 dispatch('setAlert', { msg: 'Consulta de usuarios realizada con éxito', type: 'success' } );
+
             }).catch( error => {
                 console.log(error);
                 dispatch('setLoading', false);

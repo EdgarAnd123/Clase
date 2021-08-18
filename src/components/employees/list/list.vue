@@ -38,6 +38,14 @@
               secondColumnWidth="55"
               thirdColumnWidth="15"
               :isActive="employee.activeEmployee">
+              <template v-slot:options>
+                <span @click="registerTime('mealTime')">
+                    <font-awesome-icon class="card__icon" icon="utensils"/>
+                </span>
+                <span @click="registerTime('clockOut')">
+                    <font-awesome-icon class="card__icon" icon="sign-out-alt"/>
+                </span>
+              </template>
               <template v-slot:firstColumn>
                 <card-image
                   :imageSize="80"
