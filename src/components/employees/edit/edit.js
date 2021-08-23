@@ -12,7 +12,7 @@ export default {
     },
     computed: {
         employee() {
-            return this.$root.$store.getters.getEmployee;
+            return this.$root.$store.getters.getEmployee(this.$route.params.id);
         },
         isLoading() {
             return this.$root.$store.getters.getLoading;
@@ -21,7 +21,6 @@ export default {
 
     beforeRouteEnter(to, from, next) {
         next( (vue) => { 
-            vue.$root.$store.dispatch("fetchEmployee", vue.$route.params.id.toString());
             vue.$root.$store.dispatch("initializeHeader", {title: 'Editar empleado'} );
         } )
     },

@@ -1,16 +1,8 @@
 .card__wrapper {
     display: grid;
-    grid-template-columns: 6% 94%;
+    grid-template-columns: 8% 92%;
     grid-template-rows: 1fr;
     background: $primary-background-darker-color;
-
-    .card__controls {
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: repeat(2, 1fr);
-        place-items: center end;
-        color: $white;
-    }
 
     .card {
         display: grid;
@@ -22,64 +14,32 @@
         box-shadow: 0 0 2px 0 rgba(0, 0, 0, .5);
         width: 100vw;
         transform: translateX(-20px);
-
-        .card__title {
-            font-size: 1rem;
-            font-weight: 700;
-        }
-
-        .card__title-secondary {
-            color: $secondary-text-color;
-        }
-
-        .card__text {
-            font-size: .87rem;
-        }
-    
-        .card__icon {
-            color: $secondary-text-color;
-        }
-    
-        .card__timings {
-            font-size: .75rem;
-            display: grid;
-            grid-template-columns: repeat(3, max-content);
-            grid-template-rows: 1fr;
-            grid-gap: 0 .5rem;
-            padding: 1rem 0 0 0;
-        }
-    
-        .card__thirdColumn {
+        
+        &__navigate {
             display: flex;
             align-items: center;
             justify-content: center;
-    
-            a {
+        
+            &-anchor {
                 padding: 2rem 1rem;
                 border-left: .1rem solid $border;
             }
         }
-
-        &.active {
-            transform: translateX(20px);
-            transition: transform 1500ms ease;
-        }
     }
 }
 
-.card-inactive {
-    position: relative;
-    opacity: .6;
+.card--inactive {
+    opacity: .4;
     pointer-events: none;
+
+    &__button {
+        z-index: 1;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-60%, -10%);
+        max-width: max-content;
+        background-color: $primary-background-button-lighter !important;
+    }
 }
 
-.card-inactive__button {
-    z-index: 1;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 0;
-    width: 38% !important;
-    transform: translateX(80%);
-    background-color: $primary-background-button-lighter !important;
-}

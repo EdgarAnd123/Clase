@@ -1,0 +1,12 @@
+.card-options {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    place-items: center;
+    color: $white;
+
+    &_inactive {
+        opacity: .2;
+        pointer-events: none;
+    }
+}

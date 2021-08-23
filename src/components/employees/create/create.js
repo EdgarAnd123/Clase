@@ -9,7 +9,7 @@ export default {
     data() {
         return {
             employee: {
-                activeEmployee: false,
+                isActive: false,
                 workingHours: 8
             }
         }

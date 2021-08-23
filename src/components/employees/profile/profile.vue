@@ -3,18 +3,17 @@
         <loader-component :loading="isLoading"></loader-component>
         <div class="profile-card">
             <card-image 
-                :imageSize="125" 
-                :name="validateString(employee.name, 0)" 
-                :lastName="validateString(employee.lastName, 0)" 
+                :imageSize="125"
+                :default="validateString(employee.name, 0, 1) + validateString(employee.lastName, 0, 1)"
                 :imageUrl="employee.profileImage" 
                 :editable='false' 
-                :isActive="employee.activeEmployee">
+                :isActive="employee.isActive">
             </card-image>
             <div class="profile-card__wrapper">
                 <p class="font-weight-bold">
                     {{ employee.name }} {{ employee.lastName }}
                 </p>
-                <p> {{ employee.role }} </p>
+                <p> {{ employee.role | messageEmptyValue }} </p>
                 <p v-if="employee.endDate" class="text-danger"> 
                     <span class="profile-card__text-block">
                         Fecha terminación laboral:
@@ -26,19 +25,19 @@
                 <span class="profile-card__text-block profile-card__text-highlight"> 
                     Teléfono 
                 </span> 
-                {{ employee.phoneNumber }} 
+                {{ employee.phoneNumber | messageEmptyValue }} 
             </p>
             <p class="profile-card__text profile-card__emergency-number">
                 <span class="profile-card__text-block profile-card__text-highlight">
                     Emergencia
                 </span>  
-                {{ employee.emergencyNumber }}
+                {{ employee.emergencyNumber | messageEmptyValue }}
             </p>
             <p class="profile-card__text profile-card__start-date">
                 <span class="profile-card__text-block profile-card__text-highlight">
                     Fecha inicio
                 </span>  
-                {{employee.startDate | dateFormat }} 
+                {{ employee.startDate | dateFormat }} 
             </p>
             <p class="profile-card__text profile-card__working-hours">
                 <span class="profile-card__text-block profile-card__text-highlight">

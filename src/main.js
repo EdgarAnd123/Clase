@@ -12,6 +12,7 @@ import { BootstrapVue } from 'bootstrap-vue'
 import PortalVue from 'portal-vue'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.min.css'
+import 'moment/locale/es'
 
 //Font Awesome
 library.add(fas);

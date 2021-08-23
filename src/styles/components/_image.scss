@@ -30,13 +30,15 @@
         position: absolute;
         bottom: 0;
         right: .5rem;
-        background-color: rgba(255, 255, 255, 0.75);
+        background-color: $white-transparent-750;
         border-radius: 50%;
         padding: .2rem .4rem;
+        border: 1px solid $gray-800;
     }
 
     &__icon {
         font-size: 1rem;
+        color: $gray-500;
     }
 
     &__input {

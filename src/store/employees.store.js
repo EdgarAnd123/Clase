@@ -1,11 +1,11 @@
 //import employeesApi from "@/api/employees.api.js"
 //import rolesApi from "@/api/roles.api.js"
-import { employeesCollection } from '@/api/firebase/firebase';
+import { employeesCollection, updateDoc, createDoc } from '@/api/firebase/firebase'
 
 export default  {
     state: {
         employees: null,
-        employee_map: {},
+        employee: null,
         working_hours: [8, 4],
         employees_filter: [
             {
@@ -15,12 +15,12 @@ export default  {
             },
             {
                 text: 'Activos',
-                value: 'true',
+                value: true,
                 disabled: false
             },
             {
                 text: 'Inactivos',
-                value: 'false',
+                value: false,
                 disabled: false
             }
         ],
@@ -34,15 +34,21 @@ export default  {
             "Semanal",
             "Mensual"
         ],
-        isLoading: false
+        isLoading: false,
+        collectionName: 'empleados'
     },
+
     getters: {
         getEmployees: state => {
             return state.employees;
         },
 
-        getEmployee: state => {
-            return state.employee_map;
+        getEmployee(state) {
+            return (employeeId) => { 
+                let employee = state.employees.find((e) => e.id === employeeId);
+
+                return employee;
+            }
         },
 
         getRoles: state => {
@@ -67,7 +73,7 @@ export default  {
     },
 
     actions: {
-        fetchEmployees( { commit, dispatch } ) {
+        fetchEmployees( {commit, dispatch} ) {
             dispatch('setLoading', true);
             employeesCollection.onSnapshot(snapshot => {
                 let  docs = [];
@@ -112,7 +118,7 @@ export default  {
             });*/
         },
 
-        fetchEmployee( { commit, dispatch }, payload) {
+        fetchEmployee( {commit, dispatch}, payload) {
             dispatch('setLoading', true);
             employeesCollection.doc(payload).get().then(doc => {
                 commit('SET_EMPLOYEE', doc.data());
@@ -142,7 +148,7 @@ export default  {
             });*/
 
         },
-        
+
         /*fetchRoles( {commit, getters} ) {
             rolesApi.getRoles()
             .then( response => {
@@ -155,23 +161,27 @@ export default  {
             });
         },*/
 
-        add ( {getters, dispatch}, payload) {
+        add( {getters, dispatch, state, commit}, payload ) {
             const employeeList = getters.getEmployees;
 
+            createDoc(state.collectionName, payload).then(() => {
+                commit('UPDATE_EMPLOYEES', payload);
+                dispatch('setAlert', { msg: 'Empleado creado con éxito', type: 'success' } );
+            })
             employeeList.push(payload);
-            dispatch('setAlert', { msg: 'Empleado creado con éxito', type: 'success' } );
 
             /*employeesApi.post(payload)
             .then( response => console.log( response ) )
             .catch( error => console.log(error) );*/
         },
 
-        edit ( {getters}, payload) {
-            const employeeList = getters.getEmployees;
-            const employeeIndex = employeeList.findIndex(employee => employee.id === payload.id);
-            
-            employeeList[employeeIndex] = payload;
-
+        edit( {commit, state}, payload ) {
+            updateDoc(state.collectionName, payload.id, payload).then(() => {
+                //Guardar en el store
+                commit('UPDATE_EMPLOYEES', payload);
+            }).catch(() => {
+                //Alert de error al actualizar
+            });
             /*employeesApi.patch(payload)
             .then( response => console.log( response ) )
             .catch( error => console.log(error) );*/
@@ -185,7 +195,7 @@ export default  {
 
         setLoading( {commit}, payload) {
             commit('SET_LOADING', payload);
-        },
+        }
     },
 
     mutations: {
@@ -193,16 +203,8 @@ export default  {
             state.employees = employees;
         },
 
-        SET_EMPLOYEE(state, employee) {
-            state.employee_map = employee;
-            
-            const secondsToDate = state.employee_map.startDate.toDate();
-            state.employee_map.startDate = secondsToDate;
-
-            if(state.employee_map.endDate){
-                const secondsToDate = state.employee_map.endDate.toDate();
-                state.employee_map.endDate = secondsToDate;
-            }
+        UPDATE_EMPLOYEES(state, employee) {
+            state.employees = [...state.employees, ...employee];
         },
 
         SET_ROLES(state,data) {

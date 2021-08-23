@@ -17,14 +17,15 @@ export default {
     },
     beforeRouteEnter(to, from, next) {
         next( (vue) => { 
-            vue.$root.$store.dispatch("fetchEmployee", vue.$route.params.id.toString());
+            //vue.$root.$store.dispatch("fetchEmployee", );
             vue.$root.$store.dispatch("initializeHeader", {title: 'Detalles del empleado'} );
         } )
     },
 
     computed: {
         employee () {
-            return this.$root.$store.getters.getEmployee;
+            console.log(this.$root.$store.getters.getEmployee(this.$route.params.id));
+            return this.$root.$store.getters.getEmployee(this.$route.params.id);
         },
         salaryFilters() {
             return this.$root.$store.getters.getSalaryFilters;
@@ -54,16 +55,8 @@ export default {
             } 
         },
 
-        validateArray(arr, field){
-            if (arr && arr.length > 0){
-                return arr[arr.length -1][field];
-            }
-            
-            return ''
-        },
-
-        validateString(string = '', index){
-            return string.substring(index);
+        validateString(string = '', initialIndex, endingIndex){
+            return string.substring(initialIndex, endingIndex);
         },
 
         sortNestedArray(arr, property){
@@ -118,17 +111,19 @@ export default {
     },
     filters: {
         toUSD(value) {
-            if(value === 0) return `No aplica por tiempo`;
+            if(value === 0) {
+                return `No disponible por poca antiguedad`;
+            }
 
             return `$${value} pesos`;
         },
-        phoneFormat: function(value) {
-            if (!value) return '';
-            
-            return "(" + value.substring(0,3) + ") " + value.substring(3,6) + "-" + value.substring(6);
+
+        dateFormat(value) {
+            return value ? moment(value).format('DD MMMM YYYY') : '';            
         },
-        dateFormat: function(value){
-            return value ? moment(value).format('L') : '';            
+
+        messageEmptyValue(value) {
+            return value ? value : 'Dato no registrado';
         }
     }
 }

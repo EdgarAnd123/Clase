@@ -1,34 +1,33 @@
 import cardComponent from "../../shared/card/card.vue"
 import imageComponent from "../../shared/image/image.vue"
+import cardOptionsComponent from "../list/card-options/card-options.vue"
+import cardEmployeeComponent from "../list/card-employee/card-employee.vue"
 import loaderComponent from "../../loader/loader.vue"
 import { mapGetters } from "vuex"
 import moment from 'moment'
-import { updateDoc, arrayUnion } from '@/api/firebase/firebase'
 
 export default {
   name: 'listEmployees',
   components: {
     'card': cardComponent,
     'card-image': imageComponent,
+    'card-options': cardOptionsComponent,
+    'card-employee': cardEmployeeComponent,
     'loader-component': loaderComponent,
   },
-
   data() {
     return {
-      selectedFilter: 'all',
+      selectedFilter: true,
       searchValue: '',
-      employeesCounter: 0,
-      currentDate: null
+      employeesCounter: 0
     }
   },
-
   beforeRouteEnter(to, from, next) {
     next((vue) => {
       vue.$root.$store.dispatch("fetchEmployees");
       vue.$root.$store.dispatch("initializeHeader", { title: 'Empleados' });
     })
   },
-
   computed: {
     ...mapGetters({
       employeeFilters: 'getEmployeeFilters',
@@ -41,7 +40,7 @@ export default {
       if(employeesList) {
         
         return employeesList
-        .filter(employee => this.selectedFilter.indexOf(!employee.activeEmployee))
+        .filter(employee => this.selectedFilter.toString().indexOf(!employee.isActive))
         .filter(employee => {
           if (this.searchValue) {
             return employee.name.toLowerCase().includes(this.searchValue.toLowerCase());
@@ -50,65 +49,60 @@ export default {
         })
         .sort((a, b) => (a.name > b.name) ? 1 : -1);
       }
-    }      
-  },
-
-  methods: {
-    validateArray(arr, field) {
-      if (arr && arr.length > 0){
-          return arr[arr.length -1][field];
-      }
-      
-      return '--:--'
-    },
-    registerTime(workReason) {
-      const currentHours = this.currentDate.getHours();
-      const currentMinutes = this.currentDate.getMinutes();
-      const formattedDate = moment(this.currentDate).format('L');
-
-      if(workReason === 'clockIn') {
-          updateDoc('empleados', this.uid, {
-              activeEmployee: true,
-              timings: arrayUnion({
-                  date: formattedDate,
-                  clockIn: `${currentHours}:${currentMinutes}`
-              })
-          });
-      } else {
-          //const employeeList = this.$root.$store.getters.getEmployees;
-          let employeeIndex = this.employee.findIndex(employee => 
-              employee.id === this.uid);
-          let timings = employees[employeeIndex].timings;
-          let timingToUpdate = timings[timings.length - 1];
-
-          timingToUpdate[workReason] = `${currentHours}:${currentMinutes}`;
-          timings[timings.length - 1] = timingToUpdate;
-
-          updateDoc('empleados', this.uid, {'timings': timings} );
-      }
     }
   },
+  methods: {
+    registerClockIn(employee) {
+      const date = new Date();
+      const currentHours = date.getHours();
+      const currentMinutes = date.getMinutes();
 
+      if(!employee.timings) {
+        employee.timings = [];
+      }
+
+      const payload = {
+        ...employee,
+        isActive: true,
+        timings: [
+          ...employee.timings,
+          {
+            date: moment(date).format('L'),
+            clockIn: `${currentHours}:${currentMinutes}`
+          }
+        ]
+      }
+
+      this.$root.$store.dispatch("edit",payload);
+    },
+
+    isEmployeeActive(employee) {
+      const date = new Date();
+
+      if(employee.timings) {
+        return !!employee.timings
+        .find(timing => timing.date === moment(date).format('L'));
+      }
+      
+      return false;     
+    }
+  },
   watch: {
     employees() {
       this.employeesCounter = this.employees.length;
     }
   },
-
   filters: {
-    emptyDate: function (value) {
-      if (!value) {
-        return 'Present';
+    formatBoolean(value) {
+      if(value === true) {
+        return 'Activos'
       }
 
-      return value;
-    },
-    validateTimings(value){
-      if(!value){
-          return '--:--'
+      if(value === false) {
+        return 'Inactivos'
       }
-
-      return value
+      
+      return 'Todos'
     }
   }
 }

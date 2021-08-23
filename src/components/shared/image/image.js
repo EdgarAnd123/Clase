@@ -1,22 +1,21 @@
 export default {
+	name: 'imageComponent',
 	props: {
-		name: String,
-		lastName: String,
 		imageUrl: String,
 		imageSize: Number,
 		editable: Boolean,
 		isActive: Boolean,
+		default: String
 	},
-
 	data() {
 		return {
 			imageSrc: null
 		}
 	},
-
 	methods: {
 		joinInitialLetters() {
-			return !this.name[0] || !this.lastName[0] ? '+' : this.name[0] + this.lastName[0];
+			return !this.default ? '+' : this.default;
+			//return !this.default ? '+' : this.default;
 		},
 
 		onFileChange(event) {
@@ -39,11 +38,10 @@ export default {
 			reader.readAsDataURL(file);
 		}
 	},
-
 	computed: {
 		image__outline_color() {
 			if (this.isActive) {
-				return { '--borderColor': '#72EEA6' };
+				return { '--borderColor': '#45de85' };
 			} else {
 				return { '--borderColor': '#BB0000' };
 			}
@@ -60,5 +58,5 @@ export default {
 		image() {
 			return this.imageUrl || this.imageSrc;
 		}
-	},
+	}
 }

@@ -12,7 +12,8 @@
           {{ employeesCounter }} resultados
         </p>
         <p id="popover-reactive-1" class="filters__button">
-          Filtrar por <font-awesome-icon :icon="['fas', 'angle-down']"/>
+          Filtrar por: {{ selectedFilter | formatBoolean }} 
+          <font-awesome-icon :icon="['fas', 'angle-down']"/>
         </p>
         <b-popover
           target="popover-reactive-1"
@@ -31,80 +32,46 @@
       <template>
         <transition-group name="list" tag="div" class="list__container">
           <template v-for="(employee, index) in employees">
-            <card
+            <div :key="`div-${index}`" style="position: relative;">
+              <card
               :uid="employee.id"
               :key="index"
               firstColumnWidth="25"
               secondColumnWidth="55"
               thirdColumnWidth="15"
-              :isActive="employee.activeEmployee">
+              :isEnabled="isEmployeeActive(employee)">
               <template v-slot:options>
-                <span @click="registerTime('mealTime')">
-                    <font-awesome-icon class="card__icon" icon="utensils"/>
-                </span>
-                <span @click="registerTime('clockOut')">
-                    <font-awesome-icon class="card__icon" icon="sign-out-alt"/>
-                </span>
+                <card-options :employee="employee"></card-options>
               </template>
               <template v-slot:firstColumn>
                 <card-image
                   :imageSize="80"
-                  :name="employee.name[0]"
-                  :lastName="employee.lastName[0]"
                   :imageUrl="employee.profileImage"
                   :editable="false"
-                  :isActive="employee.activeEmployee">
+                  :isActive="isEmployeeActive(employee)"
+                  :default="employee.name[0] + employee.lastName[0]">
                 </card-image>
               </template>
               <template v-slot:secondColumn>
-                <p class="card__title">
-                  {{ employee.name }} {{ employee.lastName }}
-                  <span class="card__title-secondary">
-                    #{{ employee.id }}
-                  </span>
-                </p>
-                <p class="card__text">
-                  {{ employee.role }} |
-                  <span> Sucursal {{ employee.store }} </span>
-                </p>
-                <p class="card__text">
-                  <font-awesome-icon class="card__icon" icon="phone-alt" />
-                  {{ employee.phoneNumber }}
-                </p>
-                <div class="card__timings">
-                  <span>
-                    <font-awesome-icon
-                      class="card__icon icon"
-                      icon="user-clock"/>
-                    {{ validateArray(employee.timings, "clockIn") | validateTimings() }}
-                  </span>
-                  <span>
-                    <font-awesome-icon
-                      class="card__icon icon"
-                      icon="utensils"/>
-                    {{ validateArray(employee.timings, "mealTime") | validateTimings()  }}
-                  </span>
-                  <span>
-                    <font-awesome-icon
-                      class="card__icon icon"
-                      icon="door-open"/>
-                    {{ validateArray(employee.timings, "clockOut") | validateTimings()  }}
-                  </span>
-                </div>
+                <card-employee :employee="employee"></card-employee>
               </template>
               <template v-slot:thirdColumn>
                 <router-link
                   :key="index"
                   :to="{
                     name: 'profile-employee',
-                    params: { id: employee.id },
-                  }">
+                    params: { id: employee.id }}"
+                    class="card__navigate-anchor">
                   <font-awesome-icon
                     class="card__icon text-center"
                     icon="chevron-right"/>
                 </router-link>
               </template>
             </card>
+            <b-button v-if="!isEmployeeActive(employee) && employee.isActive" class="btn card--inactive__button" block @click="registerClockIn(employee)">
+                Marcar asistencia
+            </b-button>
+            </div>
           </template>
         </transition-group>
         <router-link

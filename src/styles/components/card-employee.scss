@@ -1,0 +1,29 @@
+@import '../utils/mixins';
+
+.card-employee {
+    &__title {
+        font-size: 1rem;
+        font-weight: 700;
+    }
+    
+    &__title-secondary {
+        color: $secondary-text-color;
+    }
+    
+    &__text {
+        font-size: .87rem;
+    }
+    
+    &__timings {
+        font-size: .80rem;
+        display: grid;
+        grid-template-columns: repeat(4, max-content);
+        grid-template-rows: 1fr;
+        grid-gap: 0 .5rem;
+        padding: 1rem 0 0 0;
+
+        &_disabled {
+            color: $secondary-text-color;
+        }
+    }
+}

@@ -13,7 +13,7 @@ export default {
       menuItems: [ 
         {
           title: "Empleados",
-          icon: "phone-alt",
+          icon: "people-carry",
           children: [
             {
               title: "Lista",
@@ -24,6 +24,14 @@ export default {
               routeName: "create-employee",
             }
           ]
+        },
+        {
+          title: "Soporte",
+          icon: "phone-volume"
+        },
+        {
+          title: "FAQ",
+          icon: "question-circle"
         }
       ],
     }

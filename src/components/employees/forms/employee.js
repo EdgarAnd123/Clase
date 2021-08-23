@@ -26,8 +26,8 @@ export default {
             this.$parent.save();
         },
 
-        validateString(string = '', index){
-            return string.substring(index);
+        validateString(string = '', initialIndex, endingIndex){
+            return string.substring(initialIndex, endingIndex);
         },
 
         async onFileChange(event) {
@@ -74,7 +74,7 @@ export default {
             if (phoneNumberLength < 7) {
               return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
             }
-            return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 9)}`;
+            return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
         },
     },
 

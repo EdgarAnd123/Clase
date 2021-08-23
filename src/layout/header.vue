@@ -1,7 +1,7 @@
 <template>
     <div class="header">
         <b-navbar-toggle class="header__hamburger" target="side-menu"> 
-            <font-awesome-icon :icon="['fas', 'bars']"/>
+            <font-awesome-icon :icon="['fas', 'align-left']"/>
         </b-navbar-toggle>
         <b-sidebar id="side-menu" class="sidebar" no-header backdrop shadow>
             <div class="sidebar__header">
@@ -13,11 +13,11 @@
             <b-nav vertical class="sidebar__navbar">
                 <template v-for="(item,index) in menuItems">
                     <b-nav-item v-if="!item.children" :to="{name: item.routeName}" :key="index">
-                        {{ item.title }}
+                        <font-awesome-icon :icon="item.icon" class="header__icon"/> {{ item.title }}
                     </b-nav-item>
                     <b-nav-item-dropdown v-else :key="index">
                         <template v-slot:button-content>
-                            <font-awesome-icon :icon="item.icon"/> {{ item.title }}
+                            <font-awesome-icon :icon="item.icon" class="header__icon"/> {{ item.title }}
                         </template>
                         <template v-for="(children,index) in item.children">
                             <b-dropdown-item :to="{ name: children.routeName }" :key="index"> {{ children.title }} </b-dropdown-item>
@@ -25,7 +25,7 @@
                     </b-nav-item-dropdown>
                 </template>
                 <b-nav-item v-if="isLoggedIn" @click="signOut()"> 
-                    <font-awesome-icon :icon="['fas', 'sign-out-alt']"/> Cerrar sesión
+                    <font-awesome-icon :icon="['fas', 'sign-out-alt']" class="header__icon"/> Cerrar sesión
                 </b-nav-item>
             </b-nav>
         </b-sidebar>

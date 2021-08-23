@@ -1,17 +1,17 @@
 <template>
     <b-form id="employeeForm" class="form" @submit="triggerParentMethod">
-        <card-image v-model="employee.profileImage" :imageUrl="employee.profileImage" :imageSize="125" :name="validateString(employee.name, 0)" :lastName="validateString(employee.lastName, 0)" :editable='true' :isActive="employee.activeEmployee"></card-image>
+        <card-image v-model="employee.profileImage" :imageUrl="employee.profileImage" :imageSize="125" :default="validateString(employee.name, 0, 1) + validateString(employee.lastName, 0, 1)" :editable='true' :isActive="employee.isActive"></card-image>
 
-        <b-form-group id="name" label="Nombre" label-for="name-input">
+        <b-form-group id="name" label="Nombre(s)" label-for="name-input">
             <b-form-input id="name-input" v-model="employee.name" type="text" placeholder="Ingrese el nombre de su nuevo empleado" required></b-form-input>
         </b-form-group>
 
-        <b-form-group id="lastName" label="Apellido" label-for="lastName-input">
+        <b-form-group id="lastName" label="Apellidos" label-for="lastName-input">
             <b-form-input id="lastname-input" v-model="employee.lastName" type="text" placeholder="Ingrese el apellido de su nuevo empleado" required></b-form-input>
         </b-form-group>
 
         <b-form-group id="telephone" label="Teléfono" label-for="telephone-input">
-            <b-form-input v-model="employee.phoneNumber" id="telephone-input" type="tel" placeholder="Ingrese el teléfono de su nuevo empleado" min="10" required> </b-form-input>
+            <b-form-input v-model="employee.phoneNumber" id="telephone-input" type="tel" @keydown="phoneNumberFormatter('telephone-input')" placeholder="Ingrese el teléfono de su nuevo empleado" min="10" required> </b-form-input>
         </b-form-group>
 
         <b-form-group id="emergencyNumber" label="Teléfono de emergencia" label-for="emergencyNumber-input">
@@ -30,7 +30,7 @@
             <b-form-input id="rfc-input" v-model="employee.rfc" type="text" placeholder="Ingrese el RFC correspondiente" required></b-form-input>
         </b-form-group> 
 
-        <b-form-group id="role" label="Ocupación" label-for="role-select">
+        <b-form-group id="role" label="Puesto" label-for="role-select">
             <b-form-select plain id="role-input" v-model="employee.role" :options="roles" required>
             <template #first>
                 <b-form-select-option :value="undefined" disabled> Seleccione una opción </b-form-select-option>

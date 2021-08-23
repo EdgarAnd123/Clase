@@ -7,9 +7,8 @@ export default {
         secondColumnWidth: String,
         thirdColumnWidth: String,
         uid: String,
-        isActive: Boolean
+        isEnabled: Boolean
     },
-
     data() {
         return {
             cardSwiping: {
@@ -19,12 +18,10 @@ export default {
             }
         }
     },
-
     mounted() {
         this.swipeCard(`card-${this.uid}`);
         this.currentDate = new Date();
     },
-
     computed: {
         gridColumns() {
             return {
@@ -34,7 +31,6 @@ export default {
             }
         }
     },
-
     methods: {
         swipeCard(id) {
             const cardElement = document.getElementById(id);
@@ -50,7 +46,7 @@ export default {
                 //e.preventDefault();
 
                 let movedInX = e.changedTouches[0].clientX - this.touchedXPosition;
-                cardElement.style.left = `${( (this.elementXPosition + movedInX > 35) ? 35 : (this.elementXPosition + movedInX < 0) ? 0 : this.elementXPosition + movedInX )}px`;
+                cardElement.style.left = `${( (this.elementXPosition + movedInX > 25) ? 25 : (this.elementXPosition + movedInX < 0) ? 0 : this.elementXPosition + movedInX )}px`;
             }, false)
         }
     }

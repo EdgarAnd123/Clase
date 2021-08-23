@@ -20,8 +20,12 @@ const auth = firebase.auth();
 const employeesCollection = db.collection('empleados');
 const userCollection = db.collection('usuarios');
 
+const createDoc = function (collection, mapValues) {
+  return db.collection(collection).add(mapValues);
+}
+
 const updateDoc = function (collection, doc, mapValues) {
-  db.collection(collection).doc(doc).update(mapValues);
+  return db.collection(collection).doc(doc).update(mapValues);
 }
 
 const arrayUnion = function(mapValues) {
@@ -35,5 +39,6 @@ export {
     userCollection,
     employeesCollection,
     updateDoc,
-    arrayUnion
+    arrayUnion,
+    createDoc
 }
