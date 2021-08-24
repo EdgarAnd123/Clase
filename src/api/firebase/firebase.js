@@ -17,19 +17,19 @@ const db = firebase.firestore();
 const auth = firebase.auth();
 
 // collection references
-const employeesCollection = db.collection('empleados');
 const userCollection = db.collection('usuarios');
+const employeesCollection = db.collection('empleados');
 
-const createDoc = function (collection, mapValues) {
-  return db.collection(collection).add(mapValues);
+const createDoc = function (collection, docId, docData) {
+  return db.collection(collection).doc(docId).set(docData);
 }
 
-const updateDoc = function (collection, doc, mapValues) {
-  return db.collection(collection).doc(doc).update(mapValues);
+const updateDoc = function (collection, docId, docData) {
+  return db.collection(collection).doc(docId).update(docData);
 }
 
-const arrayUnion = function(mapValues) {
-  return firestore.FieldValue.arrayUnion(mapValues);
+const arrayUnion = function(docData) {
+  return firestore.FieldValue.arrayUnion(docData);
 }
 
 export { 

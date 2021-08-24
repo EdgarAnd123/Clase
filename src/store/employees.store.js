@@ -77,12 +77,13 @@ export default  {
             dispatch('setLoading', true);
             employeesCollection.onSnapshot(snapshot => {
                 let  docs = [];
+
                 snapshot.forEach(doc => {
                     let data = doc.data();
                     data.id = doc.id;
                     docs.push(data);
                 })
-                
+
                 commit('SET_EMPLOYEES', docs);
                 dispatch('setLoading', false);
                 dispatch('setAlert', { msg: 'Consulta de usuarios realizada con éxito', type: 'success' } );
@@ -118,23 +119,8 @@ export default  {
             });*/
         },
 
-        fetchEmployee( {commit, dispatch}, payload) {
+        /*fetchEmployee( {commit, dispatch}, payload) {
             dispatch('setLoading', true);
-            employeesCollection.doc(payload).get().then(doc => {
-                commit('SET_EMPLOYEE', doc.data());
-                dispatch('setLoading', false);
-                dispatch('setAlert', { msg: 'Consulta de usuarios realizada con éxito', type: 'success' } );
-
-            }).catch( error => {
-                console.log(error);
-                dispatch('setLoading', false);
-                dispatch('setAlert', { msg: 'Error al traer los usuarios de la base de datos', type: 'danger' } );
-            });
-            //const employee = getters.getEmployees.find(employee => employee.id === payload);
-            
-            //commit('SET_EMPLOYEE', employee);
-            
-            /*dispatch('setLoading', true);
             employeesApi.getEmployee(payload)
             .then( response => { 
                 dispatch('setLoading', false);
@@ -145,9 +131,8 @@ export default  {
                 console.log(error);
                 dispatch('setLoading', false);
                 dispatch('setAlert', { msg: 'Error al traer el usuario de la base de datos', type: 'danger' } )
-            });*/
-
-        },
+            });
+        },*/
 
         /*fetchRoles( {commit, getters} ) {
             rolesApi.getRoles()
@@ -161,14 +146,14 @@ export default  {
             });
         },*/
 
-        add( {getters, dispatch, state, commit}, payload ) {
-            const employeeList = getters.getEmployees;
+        add( {dispatch, state, commit}, payload ) {
+            const docId = (state.employees.length + 1).toString();
 
-            createDoc(state.collectionName, payload).then(() => {
-                commit('UPDATE_EMPLOYEES', payload);
+            createDoc(state.collectionName, docId, payload).then(() => {
+                commit('UPDATE_EMPLOYEES', [payload]);
                 dispatch('setAlert', { msg: 'Empleado creado con éxito', type: 'success' } );
             })
-            employeeList.push(payload);
+            //getters.getEmployees.push(payload);
 
             /*employeesApi.post(payload)
             .then( response => console.log( response ) )
@@ -178,6 +163,7 @@ export default  {
         edit( {commit, state}, payload ) {
             updateDoc(state.collectionName, payload.id, payload).then(() => {
                 //Guardar en el store
+
                 commit('UPDATE_EMPLOYEES', payload);
             }).catch(() => {
                 //Alert de error al actualizar
@@ -207,7 +193,7 @@ export default  {
             state.employees = [...state.employees, ...employee];
         },
 
-        SET_ROLES(state,data) {
+        SET_ROLES(state, data) {
             state.roles = data;
         },
 

@@ -24,7 +24,6 @@ export default {
 
     computed: {
         employee () {
-            console.log(this.$root.$store.getters.getEmployee(this.$route.params.id));
             return this.$root.$store.getters.getEmployee(this.$route.params.id);
         },
         salaryFilters() {

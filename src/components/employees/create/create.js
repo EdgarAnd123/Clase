@@ -9,7 +9,16 @@ export default {
     data() {
         return {
             employee: {
-                isActive: false,
+                name: 'Javier',
+                lastName: 'Medina',
+                phoneNumber: '(646) 125-55-66',
+                emergencyNumber: '(646) 147-35-62',
+                rfc: 'JAME950824B66',
+                role: 'Cocinero',
+                email: 'javier@hotmail.com',
+                socialNumber: '124578369',
+                baseSalary: '130',
+                isActive: true,
                 workingHours: 8
             }
         }

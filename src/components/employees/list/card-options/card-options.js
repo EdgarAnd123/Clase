@@ -15,9 +15,11 @@ export default {
 	},
 	methods: {
 		updateTimingRecord(workReason) {
-			const currentHours = this.date.getHours();
-			const currentMinutes = this.date.getMinutes();
-
+			let currentHours = this.date.getHours();
+			let currentMinutes = this.date.getMinutes();
+			currentHours = currentHours < 10 ? `0${currentHours}` : currentHours;
+			currentMinutes = currentMinutes < 10 ? `0${currentMinutes}` : currentMinutes;
+			
 			if(this.timingToUpdate) {
 				this.timingToUpdate[workReason] = `${currentHours}:${currentMinutes}`;
 				this.$root.$store.dispatch("edit", {

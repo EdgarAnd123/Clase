@@ -23,4 +23,12 @@ export default {
 
 <style lang="scss">
     @import '@/styles/main.scss';
+
+	//CSS to get work floating buttons with animations
+	/*main {
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		overflow-x: hidden
+	}*/
 </style>

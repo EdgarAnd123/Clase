@@ -73,7 +73,7 @@ export default {
         ]
       }
 
-      this.$root.$store.dispatch("edit",payload);
+      this.$root.$store.dispatch("edit", payload);
     },
 
     isEmployeeActive(employee) {

@@ -1,6 +1,6 @@
 .card__wrapper {
     display: grid;
-    grid-template-columns: 8% 92%;
+    grid-template-columns: 6% 94%;
     grid-template-rows: 1fr;
     background: $primary-background-darker-color;
 
@@ -29,8 +29,16 @@
 }
 
 .card--inactive {
-    opacity: .4;
-    pointer-events: none;
+    background-color: rgba(220, 220, 220, .7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 60px;
+    bottom: 0;
+
+    div + .card__wrapper {
+        pointer-events: none;
+    }
 
     &__button {
         z-index: 1;

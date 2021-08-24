@@ -12,9 +12,9 @@ export default {
     data() {
         return {
             cardSwiping: {
-                elementXPosition: '',
-                touchedXPosition: '',
-                lastElementXPosition: ''
+                elementXPosition: 0,
+                touchedXPosition: 0,
+                lastElementXPosition: 0
             }
         }
     },
@@ -37,16 +37,14 @@ export default {
 
             cardElement.addEventListener('touchstart', function(e){
                 //e.preventDefault();
-                
-                this.elementXPosition = cardElement.getBoundingClientRect().left;
+                this.cardXPosition = cardElement.getBoundingClientRect().left;
                 this.touchedXPosition = e.changedTouches[0].clientX;
             }, false)
 
             cardElement.addEventListener('touchmove', function(e){
                 //e.preventDefault();
-
-                let movedInX = e.changedTouches[0].clientX - this.touchedXPosition;
-                cardElement.style.left = `${( (this.elementXPosition + movedInX > 25) ? 25 : (this.elementXPosition + movedInX < 0) ? 0 : this.elementXPosition + movedInX )}px`;
+                let movedInX = e.changedTouches[0].clientX - this.touchedXPosition - 8;
+                cardElement.style.left = `${( ( this.cardXPosition + movedInX > 23) ? 23 : ( this.cardXPosition + movedInX < 0) ? 0 : this.cardXPosition + movedInX )}px`;
             }, false)
         }
     }
