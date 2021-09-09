@@ -4,7 +4,7 @@
     display: grid;
     grid-template-columns: 1fr;
     padding: 1rem;
-    grid-gap: 2rem 0;
+    grid-gap: 1.5rem 0;
 
     &-card {
         border: 2px solid $border;
@@ -98,11 +98,22 @@
             text-align: center;
         }
     }
+
+    .adjustments {
+        display: grid;
+        grid-gap: .5rem 0;
+    }
 }
 
 .separator {
     border-bottom: 1.5px solid $border;
     margin: .5rem 0;
+
+    &_double {
+        border: 2px solid $border;
+        border-radius: .5rem;
+        padding: .5rem;
+    }
 }
 
 .text-small {

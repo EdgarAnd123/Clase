@@ -11,8 +11,10 @@ export default {
 	methods: {
 		login() {
 			auth.signInWithEmailAndPassword(this.username, this.password)
-			.then(
-				() => this.$router.push('employees'),
+			.then((response) => {
+					this.$root.$store.dispatch('fetchToken', response.user.Aa);	
+					this.$router.push('employees');
+				},
 				error => {
 					console.log(error);
 				}

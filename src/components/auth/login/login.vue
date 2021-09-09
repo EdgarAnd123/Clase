@@ -2,7 +2,7 @@
     <div class="login__wrapper">
         <img src="@/assets/logo.png" alt="Logo">
         <h2 class="login__title"> Iniciar sesión </h2>
-        <b-form>
+        <b-form class="login__form">
             <b-form-group id="user" label="Usuario" label-for="user-input">
                 <b-form-input id="user-input" v-model="username" type="text" placeholder="Escriba su usuario" required></b-form-input>
             </b-form-group>

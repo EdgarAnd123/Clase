@@ -40,9 +40,9 @@ const router = new VueRouter({
 
 router.beforeEach( (to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    const auth = store.getters.getIsLoggedIn;
+    const token = store.getters.getToken;
 
-    if (!auth) { 
+    if (!token) { 
       next( {
         path: '/login'
       }) 

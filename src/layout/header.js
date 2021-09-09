@@ -26,6 +26,24 @@ export default {
           ]
         },
         {
+          title: "Administrador",
+          icon: "user-shield",
+          children: [
+            {
+              title: "Usuarios",
+              //routeName: "create-employee",
+            },
+            {
+              title: "Puestos",
+              //routeName: "employees",
+            },
+            {
+              title: "Sucursales",
+              //routeName: "create-employee",
+            }
+          ]
+        },
+        {
           title: "Soporte",
           icon: "phone-volume"
         },
@@ -40,7 +58,7 @@ export default {
   computed: {
     ...mapGetters( {
       title: 'getTitle',
-      isLoggedIn: 'getIsLoggedIn',
+      isLoggedIn: 'getToken',
       user: 'getUserData'
     })
   },

@@ -106,6 +106,51 @@
                 </p>
             </div>
         </div>
+        <div class="attendance">
+            <p class="font-weight-bold text-center"> 
+                Historial de asistencia
+            </p>
+            <div class="separator"></div>
+        </div>
+        <div class="over-time">
+            <p class="font-weight-bold text-center"> 
+                Historial de horas extras
+            </p>
+            <div class="separator"></div>
+        </div>
+        <div class="adjustments">
+            <p class="font-weight-bold text-center"> 
+                Ajustes
+            </p>
+            <div class="separator_double">
+                <p class="text-small">
+                    <span class="font-weight-bold">
+                        Cambiar hora de entrada
+                    </span>
+                </p>
+            </div>
+            <div class="separator_double">
+                <p class="text-small">
+                    <span class="font-weight-bold">
+                        Cambiar hora de salida a comer
+                    </span>
+                </p>
+            </div>
+            <div class="separator_double">
+                <p class="text-small">
+                    <span class="font-weight-bold">
+                        Cambiar hora de entrada a comer
+                    </span>
+                </p>
+            </div>
+            <div class="separator_double">
+                <p class="text-small">
+                    <span class="font-weight-bold">
+                        Cambiar hora de salida
+                    </span>
+                </p>
+            </div>
+        </div>
         <router-link 
             class="btn btn-floating"
             tag="button"

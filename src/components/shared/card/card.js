@@ -44,7 +44,7 @@ export default {
             cardElement.addEventListener('touchmove', function(e){
                 //e.preventDefault();
                 let movedInX = e.changedTouches[0].clientX - this.touchedXPosition - 8;
-                cardElement.style.left = `${( ( this.cardXPosition + movedInX > 23) ? 23 : ( this.cardXPosition + movedInX < 0) ? 0 : this.cardXPosition + movedInX )}px`;
+                cardElement.style.left = `${( ( this.cardXPosition + movedInX > 20) ? 20 : ( this.cardXPosition + movedInX < 0) ? 0 : this.cardXPosition + movedInX )}px`;
             }, false)
         }
     }

@@ -1,37 +1,38 @@
 export default {
     state: {
         user: {
-            isLoggedIn: false,
+            token: '',
             data: null
         }
     },
-
     getters: {
-        getIsLoggedIn: state => state.user.isLoggedIn,
+        getToken: state => state.user.token,
         getUserData: state => state.user.data
     },
-
     actions: {
-        fetchUser( { commit }, user ) {
-            commit('SET_LOGIN');
+        fetchUser( {commit}, user ) {
             commit('SET_USER', user);
         },
-        setLogout( { commit } ) {
+
+        fetchToken( {commit}, token ) {
+            commit('SET_TOKEN', token);
+        },
+
+        setLogout( {commit} ) {
             commit('SET_LOGOUT');
         }
     },
-
     mutations: {
-        SET_LOGIN(state) {
-            state.user.isLoggedIn = true;
+        SET_TOKEN(state, data) {
+            state.user.token = data;
         },
-        SET_LOGOUT(state) {
-            console.log(state.user.isLoggedIn);
-            state.user.isLoggedIn = false;
-            console.log(state.user.isLoggedIn);
-        },
+
         SET_USER(state, data) {
             state.user.data = data;
-          }
+        },
+        
+        SET_LOGOUT(state) {
+            state.user.token = '';
+        }
     }
 }
